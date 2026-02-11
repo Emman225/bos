@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BOS-CI | Distributeur Fibre Optique, Télécom & Énergie Solaire - Abidjan, Côte d'Ivoire</title>
+    <meta name="description" content="BOS-CI (Business Opportunities Services) - Distributeur de matériel fibre optique, télécom, réseaux, test et mesure, calibrage, formation et énergie solaire à Abidjan, Côte d'Ivoire." />
+    <meta name="keywords" content="Distributeur matériel, Fibre optique, Télécom, Réseaux, Informatique, Test et mesure, Calibrage, Formation, Énergie solaire, Côte d'Ivoire, Abidjan, BOS, soudeuse fibre optique, réflectomètre, OTDR, raccordement fibre" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                DEFAULT: '#2E7D32',
+                dark: '#1b5e20',
+                light: '#4ade80',
+                surface: '#f0f9f1',
+              },
+              brand: {
+                dark: '#0a0f0a',
+                surface: '#fdfdfd',
+                muted: '#64748b',
+              }
+            },
+            fontFamily: {
+              sans: ['Open Sans', 'sans-serif'],
+              display: ['Montserrat', 'sans-serif'],
+            },
+            animation: {
+              'spin-slow': 'spin 30s linear infinite',
+              'bounce-slow': 'bounce 4s ease-in-out infinite',
+              'fade-in': 'fadeIn 0.8s ease-out forwards',
+              'slide-up': 'slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'float': 'float 6s ease-in-out infinite',
+              'marquee': 'marquee 40s linear infinite',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              slideUp: {
+                '0%': { transform: 'translateY(30px)', opacity: '0' },
+                '100%': { transform: 'translateY(0)', opacity: '1' },
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-15px)' },
+              },
+              marquee: {
+                '0%': { transform: 'translateX(0)' },
+                '100%': { transform: 'translateX(-50%)' },
+              }
+            },
+            boxShadow: {
+              'premium': '0 20px 50px -12px rgba(0, 0, 0, 0.08)',
+              'premium-hover': '0 40px 80px -20px rgba(0, 0, 0, 0.12)',
+              'glow': '0 0 30px rgba(46, 125, 50, 0.4)',
+            }
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="/styles/global.css" />
+  </head>
+  <body class="bg-brand-surface text-slate-900 font-sans selection:bg-primary/20 selection:text-primary-dark">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
