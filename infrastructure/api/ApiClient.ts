@@ -1,4 +1,4 @@
-const API_BASE = '/api';
+const API_BASE = 'https://apibos.yemimainternational.com/api';
 const REQUEST_TIMEOUT = 15000;
 
 class ApiClient {
