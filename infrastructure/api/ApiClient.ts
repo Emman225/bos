@@ -1,5 +1,12 @@
-const API_BASE = 'https://apibos.yemimainternational.com/api';
+const API_HOST = 'https://apibos.yemimainternational.com';
+const API_BASE = `${API_HOST}/api`;
 const REQUEST_TIMEOUT = 15000;
+
+export function storageUrl(path?: string | null): string {
+  if (!path) return '';
+  if (path.startsWith('http')) return path;
+  return `${API_HOST}${path.startsWith('/') ? '' : '/'}${path}`;
+}
 
 class ApiClient {
   private token: string | null = localStorage.getItem('bos_jwt_token');

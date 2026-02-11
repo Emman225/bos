@@ -6,7 +6,7 @@ import { User } from '../../../domain/entities/User';
 import { QuoteRequest } from '../../../domain/entities/QuoteRequest';
 import { Session } from '../../../domain/entities/Session';
 import { useAppContext } from '../../context/AppProvider';
-import { apiClient } from '../../../infrastructure/api/ApiClient';
+import { apiClient, storageUrl } from '../../../infrastructure/api/ApiClient';
 import { useProducts } from '../../hooks/useProducts';
 import { useCategories } from '../../hooks/useCategories';
 import { useQuote } from '../../hooks/useQuote';
@@ -561,7 +561,7 @@ const AdminDashboard: React.FC = () => {
                   <p className="text-[10px] text-white/50 font-extrabold uppercase tracking-widest mt-1">Accès {currentUser.role}</p>
                 </div>
                 <div className="size-12 rounded-xl bg-white/10 border-2 border-white/20 shadow-lg overflow-hidden">
-                  <img src={currentUser.avatar || `https://i.pravatar.cc/150?u=${currentUser.id}`} alt="Profile" className="w-full h-full object-cover" />
+                  <img src={storageUrl(currentUser.avatar) || `https://i.pravatar.cc/150?u=${currentUser.id}`} alt="Profile" className="w-full h-full object-cover" />
                 </div>
               </div>
 
@@ -1173,7 +1173,7 @@ const AdminDashboard: React.FC = () => {
                     <div className="flex flex-col items-center gap-5 pb-10 border-b border-slate-100">
                       <div className="relative group">
                         <div className="size-28 rounded-3xl bg-slate-50 border-2 border-slate-100 overflow-hidden shadow-inner">
-                          <img src={avatarPreview || currentUser.avatar || `https://i.pravatar.cc/150?u=${currentUser.id}`} alt="Profile" className="w-full h-full object-cover" />
+                          <img src={avatarPreview || storageUrl(currentUser.avatar) || `https://i.pravatar.cc/150?u=${currentUser.id}`} alt="Profile" className="w-full h-full object-cover" />
                         </div>
                         <button
                           type="button"
