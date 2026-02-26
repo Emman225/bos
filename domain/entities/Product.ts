@@ -10,4 +10,5 @@ export interface Product {
   features: string[];
   stock: boolean;
   isNew?: boolean;
+  price?: number | null;
 }

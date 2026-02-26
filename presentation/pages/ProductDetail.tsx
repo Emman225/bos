@@ -4,9 +4,10 @@ import { ChevronLeft, ChevronRight, CheckCircle2, ShieldCheck, Truck, RotateCcw,
 import { Product } from '../../domain/entities';
 import { useAppContext } from '../context/AppProvider';
 import { useQuote } from '../hooks/useQuote';
+import { formatPrice } from '../utils/formatPrice';
 
 const ProductDetail: React.FC = () => {
-  const { navigate, navParams, products } = useAppContext();
+  const { navigate, navParams, products, settings } = useAppContext();
   const { addToQuote } = useQuote();
 
   const [activeTab, setActiveTab] = useState('specs');
@@ -165,6 +166,12 @@ const ProductDetail: React.FC = () => {
                 </span>
                 <h1 className="text-4xl lg:text-5xl font-black font-display tracking-tight text-gray-900 leading-[0.95]">{product.name}</h1>
                 <p className="text-slate-400 font-bold uppercase tracking-widest text-xs">Ref: {product.ref}</p>
+                {settings.show_product_prices && product.price != null && (
+                  <div className="pt-2">
+                    <p className="text-4xl font-black text-primary font-display tracking-tight">{formatPrice(product.price)}</p>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Prix HT</p>
+                  </div>
+                )}
               </div>
 
               {/* Description */}
@@ -198,7 +205,7 @@ const ProductDetail: React.FC = () => {
                   onClick={() => addToQuote(product)}
                   className="flex-1 h-14 bg-primary text-white rounded-2xl font-extrabold uppercase tracking-widest text-xs shadow-2xl shadow-primary/30 hover:bg-primary-dark transition-all flex items-center justify-center gap-4 active:scale-[0.97]"
                 >
-                  <ShoppingCart size={22} /> Demander un devis
+                  <ShoppingCart size={22} /> {settings.show_product_prices && product.price != null ? 'Ajouter au panier' : 'Demander un devis'}
                 </button>
                 <div className="flex flex-col items-end shrink-0">
                   <div className="flex items-center gap-2">

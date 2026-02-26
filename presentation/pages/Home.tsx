@@ -4,6 +4,7 @@ import { ArrowRight, Activity, Globe, Zap, Cpu, ShieldCheck, HardHat, CheckCircl
 import { CATEGORIES } from '../../infrastructure/seed/constants';
 import { useAppContext } from '../context/AppProvider';
 import { useQuote } from '../hooks/useQuote';
+import { formatPrice } from '../utils/formatPrice';
 
 const HERO_SLIDES = [
   {
@@ -50,7 +51,7 @@ const BLOG_ARTICLES = [
 ];
 
 const Home: React.FC = () => {
-  const { navigate, products } = useAppContext();
+  const { navigate, products, settings } = useAppContext();
   const { addToQuote } = useQuote();
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -283,12 +284,15 @@ const Home: React.FC = () => {
                   <h3 className="font-black text-gray-900 text-base leading-tight font-display tracking-tight group-hover:text-primary transition-colors line-clamp-2">{product.name}</h3>
                   <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Ref: {product.ref}</p>
                   <p className="text-sm text-slate-500 font-medium line-clamp-2 leading-relaxed flex-1">{product.description}</p>
+                  {settings.show_product_prices && product.price != null && (
+                    <p className="text-xl font-black text-primary font-display">{formatPrice(product.price)}</p>
+                  )}
                   <div className="mt-4 flex gap-3">
                     <button
                       className="flex-1 h-12 bg-primary text-white rounded-2xl font-extrabold text-[10px] uppercase tracking-[0.15em] shadow-glow hover:bg-primary-dark transition-all flex items-center justify-center gap-2 active:scale-95"
                       onClick={(e) => { e.stopPropagation(); addToQuote(product); }}
                     >
-                      Devis <ShoppingCart size={14} />
+                      {settings.show_product_prices && product.price != null ? 'Ajouter' : 'Devis'} <ShoppingCart size={14} />
                     </button>
                     <button
                       className="flex-1 h-12 bg-brand-dark text-white rounded-2xl font-extrabold text-[10px] uppercase tracking-[0.15em] hover:bg-gray-800 transition-all flex items-center justify-center gap-2 active:scale-95"

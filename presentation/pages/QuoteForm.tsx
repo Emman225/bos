@@ -5,9 +5,10 @@ import Swal from 'sweetalert2';
 import { QuoteItem } from '../../domain/entities';
 import { useAppContext } from '../context/AppProvider';
 import { useQuote } from '../hooks/useQuote';
+import { formatPrice } from '../utils/formatPrice';
 
 const QuoteForm: React.FC = () => {
-  const { navigate } = useAppContext();
+  const { navigate, settings } = useAppContext();
   const { quoteItems, removeFromQuote, updateItemQuantity, submitQuote } = useQuote();
 
   const [step, setStep] = useState(1);
@@ -93,6 +94,12 @@ const QuoteForm: React.FC = () => {
                             <div className="flex-1 min-w-0 space-y-2">
                               <span className="text-[10px] font-extrabold text-primary uppercase tracking-[0.2em]">{item.product.brand}</span>
                               <h4 className="font-extrabold text-gray-900 text-2xl leading-tight truncate">{item.product.name}</h4>
+                              {settings.show_product_prices && item.product.price != null && (
+                                <div className="flex items-center gap-3">
+                                  <span className="text-lg font-black text-primary font-display">{formatPrice(item.product.price)}</span>
+                                  {item.quantity > 1 && <span className="text-xs font-bold text-slate-400">x{item.quantity} = {formatPrice(item.product.price * item.quantity)}</span>}
+                                </div>
+                              )}
                             </div>
                             <div className="flex flex-col items-end gap-6">
                               <div className="flex items-center bg-white border-2 border-slate-100 rounded-[24px] p-2 shadow-sm">
@@ -109,6 +116,14 @@ const QuoteForm: React.FC = () => {
                             </div>
                           </div>
                         ))}
+                        {settings.show_product_prices && quoteItems.some(i => i.product.price != null) && (
+                          <div className="flex items-center justify-between p-8 bg-primary/5 rounded-[28px] border border-primary/10 mt-6">
+                            <span className="text-sm font-extrabold text-gray-900 uppercase tracking-widest">Total estimé</span>
+                            <span className="text-3xl font-black text-primary font-display">
+                              {formatPrice(quoteItems.reduce((sum, i) => sum + (i.product.price ?? 0) * i.quantity, 0))}
+                            </span>
+                          </div>
+                        )}
                       </div>
                     ) : (
                       <div className="py-32 text-center border-2 border-dashed border-gray-100 rounded-[52px] bg-gray-50/30 space-y-8">

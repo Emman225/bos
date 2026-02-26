@@ -7,6 +7,7 @@ import { QuoteRequest } from '../../../domain/entities/QuoteRequest';
 import { Session } from '../../../domain/entities/Session';
 import { useAppContext } from '../../context/AppProvider';
 import { apiClient, storageUrl } from '../../../infrastructure/api/ApiClient';
+import { formatPrice } from '../../utils/formatPrice';
 import { useProducts } from '../../hooks/useProducts';
 import { useCategories } from '../../hooks/useCategories';
 import { useQuote } from '../../hooks/useQuote';
@@ -35,7 +36,7 @@ interface ContactMessage {
 }
 
 // --- Admin tab URL routing ---
-type AdminTab = 'stats' | 'products' | 'categories' | 'quotes' | 'users' | 'clients' | 'sessions' | 'messages' | 'notifications';
+type AdminTab = 'stats' | 'products' | 'categories' | 'quotes' | 'users' | 'clients' | 'sessions' | 'messages' | 'notifications' | 'configuration';
 
 const TAB_SLUGS: Record<AdminTab, string> = {
   stats: '',
@@ -47,6 +48,7 @@ const TAB_SLUGS: Record<AdminTab, string> = {
   users: 'equipe',
   messages: 'messages',
   notifications: 'notifications',
+  configuration: 'configuration',
 };
 
 const SLUG_TO_TAB: Record<string, AdminTab> = Object.fromEntries(
@@ -63,6 +65,7 @@ const TAB_TITLES: Record<AdminTab, string> = {
   users: 'Équipe | Admin BOS-CI',
   messages: 'Messages | Admin BOS-CI',
   notifications: 'Notifications | Admin BOS-CI',
+  configuration: 'Configuration | Admin BOS-CI',
 };
 
 function getTabFromPath(): AdminTab {
@@ -79,7 +82,7 @@ const AdminDashboard: React.FC = () => {
   const { users, createUser, updateUser, deleteUser } = useUsers();
   const { currentUser, logout } = useAuth();
   const { sessions, createSession, updateSession, deleteSession } = useSessions();
-  const { updateProfile, uploadAvatar, changePassword, setCurrentUser } = useAppContext();
+  const { updateProfile, uploadAvatar, changePassword, setCurrentUser, settings, updateSettings } = useAppContext();
 
   const [activeTab, setActiveTab] = useState<AdminTab>(getTabFromPath);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -87,6 +90,7 @@ const AdminDashboard: React.FC = () => {
   const [editingItem, setEditingItem] = useState<any>(null);
   const [showUserPopup, setShowUserPopup] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [savingSettings, setSavingSettings] = useState(false);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [formCategory, setFormCategory] = useState('');
   const [mainImageFile, setMainImageFile] = useState<File | null>(null);
@@ -266,6 +270,7 @@ const AdminDashboard: React.FC = () => {
           features: (formData.get('features') as string || '').split(',').map(f => f.trim()).filter(Boolean),
           stock: formData.get('stock') === 'on',
           isNew: editingItem?.isNew ?? false,
+          price: (formData.get('price') as string)?.trim() ? parseFloat(formData.get('price') as string) : null,
         };
         if (editingItem) await updateProduct(editingItem.id, product);
         else await createProduct(product);
@@ -413,6 +418,7 @@ const AdminDashboard: React.FC = () => {
     { id: 'messages', label: 'Messages Contact', icon: <Mail size={20} /> },
     { id: 'notifications', label: 'Notifications', icon: <Bell size={20} />, badge: unreadCount },
     { id: 'users', label: 'Gestion Équipe', icon: <Users size={20} /> },
+    { id: 'configuration', label: 'Configuration', icon: <Settings size={20} /> },
   ];
 
   return (
@@ -659,7 +665,7 @@ const AdminDashboard: React.FC = () => {
             <DataTable
               title="Inventaire Produits"
               data={products}
-              columns={['Produit', 'Détails', 'Stock', 'Actions']}
+              columns={['Produit', 'Détails', 'Prix', 'Stock', 'Actions']}
               onAdd={() => openModal('product')}
               renderRow={(p: Product) => (
                 <tr key={p.id} className="hover:bg-slate-50/50 transition-colors">
@@ -673,6 +679,7 @@ const AdminDashboard: React.FC = () => {
                     <div><p className="font-extrabold text-gray-900 text-sm leading-none mb-1">{p.name}</p><p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{p.ref}</p></div>
                   </td>
                   <td className="px-6 py-4"><p className="font-extrabold text-gray-900 text-sm">{p.brand}</p><p className="text-[10px] text-primary font-extrabold uppercase tracking-widest mt-0.5">{p.category}</p></td>
+                  <td className="px-6 py-4">{p.price != null ? <span className="font-extrabold text-primary text-sm">{formatPrice(p.price)}</span> : <span className="text-[10px] text-slate-400 font-bold italic">Sur devis</span>}</td>
                   <td className="px-6 py-4"><span className={`px-3 py-1.5 rounded-full text-[9px] font-extrabold uppercase tracking-widest ${p.stock ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-500'}`}>{p.stock ? 'Disponible' : 'Indisponible'}</span></td>
                   <td className="px-6 py-4 print:hidden">
                     <div className="flex gap-2">
@@ -713,11 +720,14 @@ const AdminDashboard: React.FC = () => {
             <DataTable
               title="Journal des Devis"
               data={quotes}
-              columns={['Référence', 'Client / Entité', 'État', 'Actions']}
-              renderRow={(q: QuoteRequest) => (
+              columns={['Référence', 'Client / Entité', 'Montant', 'État', 'Actions']}
+              renderRow={(q: QuoteRequest) => {
+                const quoteTotal = q.items.reduce((sum, i: any) => sum + (i.product.price ?? 0) * i.quantity, 0);
+                return (
                 <tr key={q.id} className="hover:bg-slate-50/50 transition-colors">
                   <td className="px-6 py-4"><p className="font-extrabold text-gray-900 text-sm leading-none mb-1">{q.id}</p><p className="text-[10px] text-slate-400 font-bold">{q.date}</p></td>
                   <td className="px-6 py-4"><p className="font-extrabold text-gray-900 text-sm">{q.customer.name}</p><p className="text-[10px] text-slate-400 font-extrabold uppercase tracking-widest mt-0.5">{q.customer.company || 'Particulier'}</p></td>
+                  <td className="px-6 py-4">{quoteTotal > 0 ? <span className="font-extrabold text-primary text-sm">{formatPrice(quoteTotal)}</span> : <span className="text-[10px] text-slate-400 font-bold italic">Sur devis</span>}</td>
                   <td className="px-6 py-4">
                     <select
                       className={`px-3 py-1.5 rounded-lg text-[9px] font-extrabold uppercase tracking-widest border-none outline-none cursor-pointer transition-all ${q.status === 'pending' ? 'bg-orange-100 text-orange-600' : q.status === 'processed' ? 'bg-primary/10 text-primary' : 'bg-slate-100 text-slate-400'}`}
@@ -733,7 +743,7 @@ const AdminDashboard: React.FC = () => {
                     <button onClick={() => openModal('quote', q)} className="flex items-center gap-2 text-[10px] font-extrabold uppercase tracking-widest text-primary hover:underline">Détails <ChevronRight size={14} /></button>
                   </td>
                 </tr>
-              )}
+              );}}
             />
           )}
 
@@ -957,6 +967,52 @@ const AdminDashboard: React.FC = () => {
               )}
             />
           )}
+
+          {activeTab === 'configuration' && (
+            <div className="space-y-12 animate-fade-in">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-3xl font-black font-display text-gray-900 tracking-tight">Configuration Plateforme</h2>
+                  <p className="text-slate-400 text-sm font-medium mt-1">Paramètres généraux de l'application</p>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-[40px] border border-slate-100 shadow-premium overflow-hidden">
+                <div className="p-10 border-b border-slate-50 bg-slate-50/50">
+                  <h3 className="font-extrabold text-xs uppercase tracking-[0.2em] text-gray-900 flex items-center gap-4">
+                    <Package size={20} className="text-primary" /> Affichage des Prix
+                  </h3>
+                </div>
+                <div className="p-10 space-y-8">
+                  <div className="flex items-center justify-between p-8 bg-slate-50/50 rounded-[28px] border border-slate-100">
+                    <div className="space-y-2">
+                      <p className="font-extrabold text-gray-900 text-sm">Afficher les prix produits</p>
+                      <p className="text-[11px] text-slate-400 font-medium leading-relaxed max-w-md">
+                        Lorsque cette option est activée, les prix des produits sont visibles sur le catalogue et les fiches produit. Sinon, un bouton «&nbsp;Demander un devis&nbsp;» est affiché.
+                      </p>
+                    </div>
+                    <button
+                      onClick={async () => {
+                        setSavingSettings(true);
+                        try {
+                          await updateSettings({ show_product_prices: !settings.show_product_prices });
+                        } finally {
+                          setSavingSettings(false);
+                        }
+                      }}
+                      disabled={savingSettings}
+                      className={`relative w-16 h-9 rounded-full transition-all duration-300 shrink-0 ${settings.show_product_prices ? 'bg-primary shadow-glow' : 'bg-slate-200'} ${savingSettings ? 'opacity-60' : ''}`}
+                    >
+                      <span className={`absolute top-1 left-1 size-7 rounded-full bg-white shadow-lg transition-transform duration-300 ${settings.show_product_prices ? 'translate-x-7' : 'translate-x-0'}`}></span>
+                    </button>
+                  </div>
+                  <p className="text-[10px] font-bold text-slate-300 text-center">
+                    Les modifications prennent effet immédiatement sur le site public.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </main>
 
@@ -1001,11 +1057,26 @@ const AdminDashboard: React.FC = () => {
                       <div key={idx} className="flex items-center justify-between p-8 bg-slate-50/50 rounded-[32px] border border-slate-100 group hover:bg-white transition-all">
                         <div className="flex items-center gap-8">
                           <img src={item.product.image} className="size-20 rounded-2xl bg-white p-3 object-contain border border-slate-100" alt="" />
-                          <div><p className="font-extrabold text-gray-900 text-lg leading-none mb-2">{item.product.name}</p><p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{item.product.brand} &bull; {item.product.ref}</p></div>
+                          <div>
+                            <p className="font-extrabold text-gray-900 text-lg leading-none mb-2">{item.product.name}</p>
+                            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{item.product.brand} &bull; {item.product.ref}</p>
+                            {item.product.price != null && <p className="text-sm font-black text-primary mt-1">{formatPrice(item.product.price)}</p>}
+                          </div>
                         </div>
-                        <div className="text-center px-8 border-l border-slate-100"><p className="text-4xl font-black font-display text-primary">x{item.quantity}</p></div>
+                        <div className="flex items-center gap-6">
+                          {item.product.price != null && item.quantity > 1 && <p className="text-sm font-bold text-slate-400">{formatPrice(item.product.price * item.quantity)}</p>}
+                          <div className="text-center px-8 border-l border-slate-100"><p className="text-4xl font-black font-display text-primary">x{item.quantity}</p></div>
+                        </div>
                       </div>
                     ))}
+                    {editingItem.items.some((i: any) => i.product.price != null) && (
+                      <div className="flex items-center justify-between p-8 bg-primary/5 rounded-[28px] border border-primary/10 mt-2">
+                        <span className="text-xs font-extrabold text-gray-900 uppercase tracking-widest">Total estimé</span>
+                        <span className="text-3xl font-black text-primary font-display">
+                          {formatPrice(editingItem.items.reduce((sum: number, i: any) => sum + (i.product.price ?? 0) * i.quantity, 0))}
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -1019,6 +1090,7 @@ const AdminDashboard: React.FC = () => {
                     <div className="space-y-2"><label className="text-[11px] font-extrabold uppercase text-slate-400 ml-4">Référence</label><input required name="ref" defaultValue={editingItem?.ref} className="w-full h-20 px-8 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-primary/20 outline-none font-bold text-gray-900" /></div>
                     <div className="space-y-2"><label className="text-[11px] font-extrabold uppercase text-slate-400 ml-4">Marque</label><input required name="brand" defaultValue={editingItem?.brand} className="w-full h-20 px-8 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-primary/20 outline-none font-bold text-gray-900" /></div>
                     <div className="space-y-2"><label className="text-[11px] font-extrabold uppercase text-slate-400 ml-4">Rayon</label><select required name="category" value={formCategory} onChange={e => setFormCategory(e.target.value)} className="w-full h-20 px-8 rounded-2xl bg-slate-50 outline-none font-bold text-gray-900 cursor-pointer"><option value="">— Sélectionner —</option>{categories.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}</select></div>
+                    <div className="space-y-2 col-span-2"><label className="text-[11px] font-extrabold uppercase text-slate-400 ml-4">Prix (FCFA)</label><input name="price" type="number" step="1" min="0" defaultValue={editingItem?.price ?? ''} placeholder="Laisser vide = sur devis" className="w-full h-20 px-8 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-primary/20 outline-none font-bold text-gray-900" /></div>
                     {/* Image Principale - Upload ou URL */}
                     <div className="col-span-2 space-y-3">
                       <div className="flex items-center justify-between">

@@ -4,6 +4,7 @@ import { Category } from '../../domain/entities/Category';
 import { QuoteItem, QuoteRequest } from '../../domain/entities/QuoteRequest';
 import { User } from '../../domain/entities/User';
 import { Session } from '../../domain/entities/Session';
+import { AppSettings } from '../../domain/entities/Settings';
 
 import { ProductUseCases } from '../../application/ProductUseCases';
 import { CategoryUseCases } from '../../application/CategoryUseCases';
@@ -11,6 +12,7 @@ import { QuoteUseCases } from '../../application/QuoteUseCases';
 import { AuthUseCases } from '../../application/AuthUseCases';
 import { AIUseCases } from '../../application/AIUseCases';
 import { SessionUseCases } from '../../application/SessionUseCases';
+import { SettingsUseCases } from '../../application/SettingsUseCases';
 
 import { ApiProductRepository } from '../../infrastructure/api/ApiProductRepository';
 import { ApiCategoryRepository } from '../../infrastructure/api/ApiCategoryRepository';
@@ -18,6 +20,7 @@ import { ApiQuoteRepository } from '../../infrastructure/api/ApiQuoteRepository'
 import { ApiUserRepository } from '../../infrastructure/api/ApiUserRepository';
 import { ApiAIService } from '../../infrastructure/api/ApiAIService';
 import { ApiSessionRepository } from '../../infrastructure/api/ApiSessionRepository';
+import { ApiSettingsRepository } from '../../infrastructure/api/ApiSettingsRepository';
 import { apiClient } from '../../infrastructure/api/ApiClient';
 
 // --- Instantiate repositories (API infrastructure) ---
@@ -27,6 +30,7 @@ const quoteRepo = new ApiQuoteRepository();
 const userRepo = new ApiUserRepository();
 const aiService = new ApiAIService();
 const sessionRepo = new ApiSessionRepository();
+const settingsRepo = new ApiSettingsRepository();
 
 // --- Instantiate use cases (application) ---
 const productUseCases = new ProductUseCases(productRepo);
@@ -35,6 +39,7 @@ const quoteUseCases = new QuoteUseCases(quoteRepo);
 const authUseCases = new AuthUseCases(userRepo);
 const aiUseCases = new AIUseCases(aiService);
 const sessionUseCases = new SessionUseCases(sessionRepo);
+const settingsUseCases = new SettingsUseCases(settingsRepo);
 
 // --- Notification type ---
 export interface Notification {
@@ -94,6 +99,11 @@ interface AppContextValue {
   createSession: (session: Session) => Promise<void>;
   updateSession: (id: string, session: Session) => Promise<void>;
   deleteSession: (id: string) => Promise<void>;
+
+  // Settings
+  settings: AppSettings;
+  refreshSettings: () => Promise<void>;
+  updateSettings: (settings: Partial<AppSettings>) => Promise<void>;
 
   // AI
   getRecommendation: (userNeeds: string) => Promise<string>;
@@ -166,6 +176,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [currentPage, setCurrentPage] = useState('home');
   const [navParams, setNavParams] = useState<any>(null);
   const [notification, setNotification] = useState<Notification | null>(null);
+  const [settings, setSettings] = useState<AppSettings>({ show_product_prices: false });
 
   // --- Validate stored session on mount ---
   useEffect(() => {
@@ -184,6 +195,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       productUseCases.getAll().then(setProducts),
       categoryUseCases.getAll().then(setCategories),
       sessionUseCases.getAll().then(setSessions),
+      settingsUseCases.getAll().then(setSettings),
     ]).finally(() => setIsLoading(false));
   }, []);
 
@@ -253,6 +265,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     await sessionUseCases.delete(id);
     await refreshSessions();
   }, [refreshSessions]);
+
+  // --- Settings ---
+  const refreshSettings = useCallback(async () => {
+    const data = await settingsUseCases.getAll();
+    setSettings(data);
+  }, []);
+  const updateSettings = useCallback(async (newSettings: Partial<AppSettings>) => {
+    const data = await settingsUseCases.update(newSettings);
+    setSettings(data);
+  }, []);
 
   // --- Quotes ---
   const refreshQuotes = useCallback(async () => {
@@ -399,6 +421,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     categories, refreshCategories, createCategory, updateCategory, deleteCategory,
     quotes, refreshQuotes, submitQuote, updateQuoteStatus,
     sessions, refreshSessions, createSession, updateSession, deleteSession,
+    settings, refreshSettings, updateSettings,
     quoteItems, addToQuote, removeFromQuote, updateItemQuantity, clearCart,
     currentUser, setCurrentUser, users, refreshUsers, login, logout, createUser, updateUser, deleteUser, updateProfile, uploadAvatar, changePassword,
     getRecommendation,
@@ -410,6 +433,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     categories, refreshCategories, createCategory, updateCategory, deleteCategory,
     quotes, refreshQuotes, submitQuote, updateQuoteStatus,
     sessions, refreshSessions, createSession, updateSession, deleteSession,
+    settings, refreshSettings, updateSettings,
     quoteItems, addToQuote, removeFromQuote, updateItemQuantity, clearCart,
     currentUser, setCurrentUser, users, refreshUsers, login, logout, createUser, updateUser, deleteUser, updateProfile, uploadAvatar, changePassword,
     getRecommendation,

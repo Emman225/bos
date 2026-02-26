@@ -4,8 +4,9 @@ import { Search, SlidersHorizontal, Package, ArrowRight, Sparkles, Send, Shoppin
 import { Product, Category } from '../../domain/entities';
 import { useAppContext } from '../context/AppProvider';
 import { useQuote } from '../hooks/useQuote';
+import { formatPrice } from '../utils/formatPrice';
 
-const ProductRow: React.FC<{ product: Product; imageCount: number; navigate: (page: string, params?: any) => void; addToQuote: (p: Product) => void }> = ({ product, imageCount, navigate, addToQuote }) => (
+const ProductRow: React.FC<{ product: Product; imageCount: number; navigate: (page: string, params?: any) => void; addToQuote: (p: Product) => void; showPrices: boolean }> = ({ product, imageCount, navigate, addToQuote, showPrices }) => (
   <div className="group bg-white rounded-[32px] border border-slate-100 overflow-hidden flex flex-row shadow-premium hover:shadow-premium-hover hover:border-primary/20 transition-all duration-500">
     <div className="w-[280px] shrink-0 bg-slate-50 relative overflow-hidden cursor-pointer rounded-2xl m-4" onClick={() => navigate('product', { productId: product.id })}>
       <img className="w-full h-full object-contain mix-blend-multiply p-8 transition-all duration-700 group-hover:scale-110" src={product.image} alt={product.name} />
@@ -46,10 +47,13 @@ const ProductRow: React.FC<{ product: Product; imageCount: number; navigate: (pa
         <h3 className="font-black text-gray-900 text-lg leading-tight font-display tracking-tight cursor-pointer hover:text-primary transition-colors" onClick={() => navigate('product', { productId: product.id })}>{product.name}</h3>
         <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Ref: {product.ref}</p>
         <p className="text-sm text-slate-500 font-medium line-clamp-2 leading-relaxed">{product.description}</p>
+        {showPrices && product.price != null && (
+          <p className="text-2xl font-black text-primary font-display">{formatPrice(product.price)}</p>
+        )}
       </div>
       <div className="flex flex-col gap-3 shrink-0">
         <button className="bg-primary text-white h-14 px-8 rounded-2xl font-extrabold text-[10px] uppercase tracking-[0.15em] shadow-glow hover:bg-primary-dark transition-all flex items-center justify-center gap-3 active:scale-95" onClick={() => addToQuote(product)}>
-          Devis <ShoppingCart size={16} />
+          {showPrices && product.price != null ? 'Ajouter' : 'Devis'} <ShoppingCart size={16} />
         </button>
         <button className="h-14 px-8 rounded-2xl bg-brand-dark text-white flex items-center justify-center gap-2 hover:bg-gray-800 transition-all text-[10px] font-extrabold uppercase tracking-widest active:scale-95" onClick={() => navigate('product', { productId: product.id })}>
           Détails <ArrowRight size={16} />
@@ -60,7 +64,7 @@ const ProductRow: React.FC<{ product: Product; imageCount: number; navigate: (pa
 );
 
 const Catalog: React.FC = () => {
-  const { navigate, navParams, products, categories, getRecommendation, isLoading } = useAppContext();
+  const { navigate, navParams, products, categories, getRecommendation, isLoading, settings } = useAppContext();
   const { addToQuote } = useQuote();
 
   const [selectedCategory, setSelectedCategory] = useState<string>(navParams?.category || 'all');
@@ -326,7 +330,7 @@ const Catalog: React.FC = () => {
                 <div className="space-y-6">
                   {paginatedProducts.map((product) => {
                     const imageCount = (product.images?.length || 0) + (product.images?.length ? 0 : 1);
-                    return (<ProductRow key={product.id} product={product} imageCount={imageCount} navigate={navigate} addToQuote={addToQuote} />);
+                    return (<ProductRow key={product.id} product={product} imageCount={imageCount} navigate={navigate} addToQuote={addToQuote} showPrices={settings.show_product_prices} />);
                   })}
                 </div>
 
@@ -374,7 +378,7 @@ const Catalog: React.FC = () => {
                     <div className="space-y-6">
                       {prods.map((product) => {
                         const imageCount = (product.images?.length || 0) + (product.images?.length ? 0 : 1);
-                        return (<ProductRow key={product.id} product={product} imageCount={imageCount} navigate={navigate} addToQuote={addToQuote} />);
+                        return (<ProductRow key={product.id} product={product} imageCount={imageCount} navigate={navigate} addToQuote={addToQuote} showPrices={settings.show_product_prices} />);
                       })}
                     </div>
                   </div>
