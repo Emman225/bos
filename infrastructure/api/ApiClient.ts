@@ -1,4 +1,4 @@
-const API_HOST = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+const API_HOST = import.meta.env.VITE_API_URL || 'https://apibos.yemimainternational.com';
 const API_BASE = `${API_HOST}/api`;
 const REQUEST_TIMEOUT = 15000;
 
