@@ -86,7 +86,7 @@ const Navbar: React.FC = () => {
               </span>
 
               {/* Mega Menu - Compact */}
-              <div className={`absolute top-full left-1/2 -translate-x-1/2 w-[780px] bg-white shadow-premium-hover rounded-2xl border border-slate-100 overflow-hidden transition-all duration-500 ease-out ${showMegaMenu ? 'opacity-100 visible translate-y-2' : 'opacity-0 invisible translate-y-4'}`}>
+              <div className={`absolute top-full left-1/2 -translate-x-1/2 w-[780px] max-w-[90vw] bg-white shadow-premium-hover rounded-2xl border border-slate-100 overflow-hidden transition-all duration-500 ease-out ${showMegaMenu ? 'opacity-100 visible translate-y-2' : 'opacity-0 invisible translate-y-4'}`}>
                 <div className="flex">
                   <div className="w-[250px] p-5 border-r border-slate-100">
                     <h3 className="text-[10px] font-extrabold text-slate-400 uppercase tracking-[0.25em] mb-3 px-2">Catégories</h3>
@@ -176,7 +176,7 @@ const Navbar: React.FC = () => {
           <div className="flex items-center gap-4">
             <div className="hidden lg:flex relative group">
               <Search size={20} className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors" />
-              <input className="bg-slate-50/50 border-2 border-transparent focus:border-primary/20 focus:bg-white w-[200px] h-14 pl-14 pr-6 rounded-[24px] text-sm font-bold outline-none transition-all shadow-sm" placeholder="Rechercher..." />
+              <input className="bg-slate-50/50 border-2 border-transparent focus:border-primary/20 focus:bg-white w-[160px] xl:w-[200px] h-14 pl-14 pr-6 rounded-[24px] text-sm font-bold outline-none transition-all shadow-sm" placeholder="Rechercher..." />
             </div>
 
             <button className="size-14 bg-white text-slate-600 border border-slate-100 hover:text-primary hover:bg-primary/5 rounded-[20px] transition-all relative flex items-center justify-center shadow-premium" onClick={() => handleNav('quote')}>
@@ -205,7 +205,7 @@ const Navbar: React.FC = () => {
       {/* Mobile Menu */}
       <div className={`fixed inset-0 bg-brand-dark/40 backdrop-blur-md z-[200] transition-opacity duration-500 xl:hidden ${mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`} onClick={() => setMobileMenuOpen(false)}>
         <div
-          className={`absolute right-0 top-0 h-full w-[90%] max-w-sm bg-white shadow-premium-hover transition-transform duration-700 p-12 flex flex-col gap-12 ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+          className={`absolute right-0 top-0 h-full w-[90%] max-w-sm bg-white shadow-premium-hover transition-transform duration-700 p-6 sm:p-10 flex flex-col gap-8 sm:gap-12 ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
           onClick={e => e.stopPropagation()}
         >
           <div className="flex justify-between items-center">
@@ -216,19 +216,19 @@ const Navbar: React.FC = () => {
             <button className="p-4 bg-slate-50 rounded-2xl" onClick={() => setMobileMenuOpen(false)}><X size={24} /></button>
           </div>
           <nav className="flex flex-col gap-2">
-            <button onClick={() => handleNav('home')} className="text-2xl font-extrabold text-left py-6 border-b border-slate-50 hover:text-primary transition-colors">Accueil</button>
-            <button onClick={() => handleNav('about')} className="text-2xl font-extrabold text-left py-6 border-b border-slate-50 hover:text-primary transition-colors">À Propos</button>
-            <button onClick={() => handleNav('catalog')} className="text-2xl font-extrabold text-left py-6 border-b border-slate-50 hover:text-primary transition-colors">Produits</button>
-            <button onClick={() => handleNav('support')} className="text-2xl font-extrabold text-left py-6 border-b border-slate-50 hover:text-primary transition-colors">S.A.V</button>
-            <button onClick={() => handleNav('formation')} className="text-2xl font-extrabold text-left py-6 border-b border-slate-50 hover:text-primary transition-colors">Formation</button>
-            <button onClick={() => handleNav('expertise')} className="text-2xl font-extrabold text-left py-6 border-b border-slate-50 hover:text-primary transition-colors">Tests & Mesures</button>
-            <button onClick={() => handleNav('contact')} className="text-2xl font-extrabold text-left py-6 border-b border-slate-50 hover:text-primary transition-colors">Contact</button>
+            <button onClick={() => handleNav('home')} className="text-xl sm:text-2xl font-extrabold text-left py-4 sm:py-6 border-b border-slate-50 hover:text-primary transition-colors">Accueil</button>
+            <button onClick={() => handleNav('about')} className="text-xl sm:text-2xl font-extrabold text-left py-4 sm:py-6 border-b border-slate-50 hover:text-primary transition-colors">À Propos</button>
+            <button onClick={() => handleNav('catalog')} className="text-xl sm:text-2xl font-extrabold text-left py-4 sm:py-6 border-b border-slate-50 hover:text-primary transition-colors">Produits</button>
+            <button onClick={() => handleNav('support')} className="text-xl sm:text-2xl font-extrabold text-left py-4 sm:py-6 border-b border-slate-50 hover:text-primary transition-colors">S.A.V</button>
+            <button onClick={() => handleNav('formation')} className="text-xl sm:text-2xl font-extrabold text-left py-4 sm:py-6 border-b border-slate-50 hover:text-primary transition-colors">Formation</button>
+            <button onClick={() => handleNav('expertise')} className="text-xl sm:text-2xl font-extrabold text-left py-4 sm:py-6 border-b border-slate-50 hover:text-primary transition-colors">Tests & Mesures</button>
+            <button onClick={() => handleNav('contact')} className="text-xl sm:text-2xl font-extrabold text-left py-4 sm:py-6 border-b border-slate-50 hover:text-primary transition-colors">Contact</button>
           </nav>
           <div className="text-sm text-slate-400 space-y-2">
             <p className="flex items-center gap-2"><Phone size={14} /> +225 27 22 23 06 39</p>
             <p className="flex items-center gap-2"><Mail size={14} /> info@bos-ci.com</p>
           </div>
-          <button onClick={() => handleNav('quote')} className="mt-auto h-20 w-full rounded-[28px] bg-primary text-white text-lg font-extrabold uppercase tracking-[0.2em] shadow-glow">Demander un devis</button>
+          <button onClick={() => handleNav('quote')} className="mt-auto h-16 sm:h-20 w-full rounded-[28px] bg-primary text-white text-base sm:text-lg font-extrabold uppercase tracking-[0.2em] shadow-glow">Demander un devis</button>
         </div>
       </div>
     </>

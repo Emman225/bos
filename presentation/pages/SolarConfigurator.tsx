@@ -15,12 +15,12 @@ const SolarConfigurator: React.FC = () => {
   return (
     <div className="min-h-screen bg-primary-surface pt-36 pb-12 lg:pt-40 lg:pb-24">
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="flex flex-col lg:flex-row justify-between items-end gap-12 mb-16">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 lg:gap-12 mb-10 lg:mb-16">
           <div className="max-w-xl space-y-4">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 text-orange-600 text-[10px] font-extrabold uppercase tracking-widest">
               Dimensionnement Solaire
             </div>
-            <h1 className="text-4xl lg:text-7xl font-black font-display tracking-tighter text-gray-900 leading-none">
+            <h1 className="text-2xl sm:text-3xl lg:text-7xl font-black font-display tracking-tighter text-gray-900 leading-none">
               Configurateur <span className="text-orange-500 italic">PV.</span>
             </h1>
             <p className="text-gray-500 text-lg lg:text-xl font-medium">Sécurisez vos sites télécoms avec une énergie autonome et certifiée.</p>
@@ -32,13 +32,13 @@ const SolarConfigurator: React.FC = () => {
                 localStorage.setItem('bos_solar_config', JSON.stringify(config));
                 Swal.fire({ icon: 'success', title: 'Configuration sauvegardée !', text: 'Votre dimensionnement a été enregistré.', timer: 2000, showConfirmButton: false, customClass: { popup: 'rounded-3xl' } });
               }}
-              className="h-20 px-10 rounded-[28px] bg-white border border-gray-100 text-gray-900 font-extrabold uppercase tracking-widest text-[10px] shadow-sm hover:shadow-premium transition-all flex items-center gap-3 active:scale-95"
+              className="h-14 sm:h-16 lg:h-20 px-6 sm:px-8 lg:px-10 rounded-[20px] sm:rounded-[24px] lg:rounded-[28px] bg-white border border-gray-100 text-gray-900 font-extrabold uppercase tracking-widest text-[10px] shadow-sm hover:shadow-premium transition-all flex items-center gap-3 active:scale-95"
             >
               <Save size={18} /> Sauvegarder
             </button>
             <button
               onClick={() => { window.print(); }}
-              className="h-20 px-10 rounded-[28px] bg-brand-dark text-white font-extrabold uppercase tracking-widest text-[10px] shadow-xl hover:bg-gray-800 transition-all flex items-center gap-3 active:scale-95"
+              className="h-14 sm:h-16 lg:h-20 px-6 sm:px-8 lg:px-10 rounded-[20px] sm:rounded-[24px] lg:rounded-[28px] bg-brand-dark text-white font-extrabold uppercase tracking-widest text-[10px] shadow-xl hover:bg-gray-800 transition-all flex items-center gap-3 active:scale-95"
             >
               <Download size={18} /> PDF Export
             </button>
@@ -48,7 +48,7 @@ const SolarConfigurator: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Inputs */}
           <div className="lg:col-span-5 space-y-8">
-            <div className="bg-white p-12 rounded-[56px] shadow-premium border border-gray-50 space-y-12">
+            <div className="bg-white p-6 sm:p-8 lg:p-12 rounded-[32px] sm:rounded-[44px] lg:rounded-[56px] shadow-premium border border-gray-50 space-y-8 sm:space-y-10 lg:space-y-12">
               <div className="space-y-8">
                 <div className="flex justify-between items-center">
                   <label className="text-[11px] font-extrabold uppercase tracking-widest text-gray-400">Charge journalière</label>
@@ -76,7 +76,7 @@ const SolarConfigurator: React.FC = () => {
                     <button
                       key={d}
                       onClick={() => setBackupDays(d)}
-                      className={`h-20 rounded-[28px] font-extrabold text-sm transition-all flex items-center justify-center ${backupDays === d ? 'bg-orange-500 text-white shadow-glow rotate-2' : 'bg-slate-50 text-slate-400 hover:bg-slate-100'}`}
+                      className={`h-14 sm:h-16 lg:h-20 rounded-[20px] sm:rounded-[24px] lg:rounded-[28px] font-extrabold text-sm transition-all flex items-center justify-center ${backupDays === d ? 'bg-orange-500 text-white shadow-glow rotate-2' : 'bg-slate-50 text-slate-400 hover:bg-slate-100'}`}
                     >
                       {d}j
                     </button>
@@ -97,11 +97,11 @@ const SolarConfigurator: React.FC = () => {
 
           {/* Results Grid */}
           <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-12 rounded-[64px] bg-orange-500 text-white flex flex-col justify-between gap-12 shadow-2xl relative overflow-hidden group">
+            <div className="p-6 sm:p-8 lg:p-12 rounded-[32px] sm:rounded-[48px] lg:rounded-[64px] bg-orange-500 text-white flex flex-col justify-between gap-8 sm:gap-10 lg:gap-12 shadow-2xl relative overflow-hidden group">
               <Sun size={200} className="absolute -top-10 -right-10 opacity-10 rotate-12 transition-transform duration-1000 group-hover:scale-125" />
               <div className="space-y-4 relative z-10">
                 <h3 className="text-[11px] font-extrabold uppercase tracking-[0.4em] opacity-80">Capacité Solaire</h3>
-                <p className="text-7xl font-black font-display tracking-tighter">{solarNeeded} Wc</p>
+                <p className="text-4xl sm:text-5xl lg:text-7xl font-black font-display tracking-tighter">{solarNeeded} Wc</p>
               </div>
               <div className="relative z-10 flex items-center gap-3 bg-white/10 backdrop-blur-md p-5 rounded-3xl border border-white/20">
                 <CheckCircle2 size={20} />
@@ -109,11 +109,11 @@ const SolarConfigurator: React.FC = () => {
               </div>
             </div>
 
-            <div className="p-12 rounded-[64px] bg-brand-dark text-white flex flex-col justify-between gap-12 shadow-2xl relative overflow-hidden group">
+            <div className="p-6 sm:p-8 lg:p-12 rounded-[32px] sm:rounded-[48px] lg:rounded-[64px] bg-brand-dark text-white flex flex-col justify-between gap-8 sm:gap-10 lg:gap-12 shadow-2xl relative overflow-hidden group">
               <Battery size={200} className="absolute -bottom-10 -left-10 opacity-5 -rotate-12 transition-transform duration-1000 group-hover:scale-125" />
               <div className="space-y-4 relative z-10">
                 <h3 className="text-[11px] font-extrabold uppercase tracking-[0.4em] opacity-80">Stockage Lithium</h3>
-                <p className="text-7xl font-black font-display tracking-tighter">{batteryNeeded} kWh</p>
+                <p className="text-4xl sm:text-5xl lg:text-7xl font-black font-display tracking-tighter">{batteryNeeded} kWh</p>
               </div>
               <div className="relative z-10 flex items-center gap-3 bg-white/5 backdrop-blur-md p-5 rounded-3xl border border-white/10">
                 <Zap size={20} className="text-primary" />
@@ -121,17 +121,17 @@ const SolarConfigurator: React.FC = () => {
               </div>
             </div>
 
-            <div className="md:col-span-2 bg-white p-12 rounded-[64px] shadow-premium border border-slate-50 flex flex-col md:flex-row items-center gap-12 group hover:border-primary/20 transition-all">
-              <div className="size-28 rounded-[36px] bg-primary/10 text-primary flex items-center justify-center shrink-0 shadow-inner group-hover:bg-primary group-hover:text-white transition-all duration-700">
-                <Calculator size={56} />
+            <div className="md:col-span-2 bg-white p-6 sm:p-8 lg:p-12 rounded-[32px] sm:rounded-[48px] lg:rounded-[64px] shadow-premium border border-slate-50 flex flex-col md:flex-row items-center gap-8 sm:gap-10 lg:gap-12 group hover:border-primary/20 transition-all">
+              <div className="size-20 sm:size-24 lg:size-28 rounded-[24px] sm:rounded-[30px] lg:rounded-[36px] bg-primary/10 text-primary flex items-center justify-center shrink-0 shadow-inner group-hover:bg-primary group-hover:text-white transition-all duration-700">
+                <Calculator className="size-10 sm:size-12 lg:size-14" />
               </div>
               <div className="space-y-3 flex-1 text-center md:text-left">
-                <h3 className="text-3xl font-black text-gray-900 font-display tracking-tight">Expertise Technique.</h3>
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-gray-900 font-display tracking-tight">Expertise Technique.</h3>
                 <p className="text-slate-500 font-medium">Nos ingénieurs certifiés réalisent votre schéma unifilaire et le colisage exact sous 48h.</p>
               </div>
               <button
                 onClick={() => navigate('contact')}
-                className="w-full md:w-auto h-24 px-16 rounded-[36px] bg-primary text-white font-extrabold uppercase tracking-[0.2em] text-[12px] hover:bg-primary-dark transition-all flex items-center justify-center gap-4 group/btn shadow-glow active:scale-95"
+                className="w-full md:w-auto h-16 sm:h-20 lg:h-24 px-8 sm:px-12 lg:px-16 rounded-[24px] sm:rounded-[30px] lg:rounded-[36px] bg-primary text-white font-extrabold uppercase tracking-[0.2em] text-[12px] hover:bg-primary-dark transition-all flex items-center justify-center gap-4 group/btn shadow-glow active:scale-95"
               >
                 Etude de Cas <ArrowRight size={20} className="group-hover/btn:translate-x-2 transition-transform" />
               </button>

@@ -76,7 +76,7 @@ const Home: React.FC = () => {
           <div className="absolute bottom-[-10%] left-[-10%] w-[45%] h-[60%] bg-primary/8 rounded-full blur-[140px] opacity-50"></div>
         </div>
 
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-16 w-full grid grid-cols-1 lg:grid-cols-2 gap-24 items-center relative z-10">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-16 w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-center relative z-10">
           {/* Content Area */}
           <div className="flex flex-col gap-12 max-w-[780px]">
             <div className="flex flex-col gap-10">
@@ -85,7 +85,7 @@ const Home: React.FC = () => {
                 {HERO_SLIDES[currentSlide].tag}
               </div>
 
-              <h1 key={`title-${currentSlide}`} className="text-7xl lg:text-[112px] font-black leading-[0.82] tracking-tighter font-display text-gray-900 text-balance animate-slide-up">
+              <h1 key={`title-${currentSlide}`} className="text-4xl sm:text-5xl lg:text-7xl xl:text-[112px] font-black leading-[0.82] tracking-tighter font-display text-gray-900 text-balance animate-slide-up">
                 {HERO_SLIDES[currentSlide].title.split(' ').map((word, i) => (
                   <React.Fragment key={i}>
                     {word === 'l\'avenir' || word === 'Savoir-Faire' || word === 'Certification.' ? <span className="text-primary italic">{word} </span> : word + ' '}
@@ -101,14 +101,14 @@ const Home: React.FC = () => {
 
             <div className="flex flex-wrap gap-6 pt-6">
               <button
-                className="group relative flex items-center justify-center gap-5 min-w-[300px] h-20 rounded-[32px] bg-primary text-white text-lg font-extrabold transition-all hover:bg-primary-dark shadow-[0_25px_50px_-12px_rgba(47,127,52,0.4)] hover:-translate-y-1.5 active:scale-95"
+                className="group relative flex items-center justify-center gap-5 w-full sm:w-auto sm:min-w-[300px] h-16 sm:h-20 rounded-[32px] bg-primary text-white text-base sm:text-lg font-extrabold transition-all hover:bg-primary-dark shadow-[0_25px_50px_-12px_rgba(47,127,52,0.4)] hover:-translate-y-1.5 active:scale-95"
                 onClick={() => navigate('catalog')}
               >
                 Découvrir nos produits
                 <ArrowRight size={22} className="group-hover:translate-x-2 transition-transform duration-300" />
               </button>
               <button
-                className="flex items-center justify-center gap-4 min-w-[260px] h-20 rounded-[32px] bg-white border-2 border-slate-100 text-gray-900 text-lg font-bold transition-all hover:bg-slate-50 hover:border-slate-300 shadow-sm"
+                className="flex items-center justify-center gap-4 w-full sm:w-auto sm:min-w-[260px] h-16 sm:h-20 rounded-[32px] bg-white border-2 border-slate-100 text-gray-900 text-base sm:text-lg font-bold transition-all hover:bg-slate-50 hover:border-slate-300 shadow-sm"
                 onClick={() => navigate('quote')}
               >
                 Demander un devis
@@ -170,16 +170,16 @@ const Home: React.FC = () => {
       </section>
 
       {/* Qui sommes-nous - Brief Intro */}
-      <section className="py-24 px-6 lg:px-16 bg-slate-100">
+      <section className="py-14 sm:py-20 lg:py-24 px-6 lg:px-16 bg-slate-100">
         <div className="max-w-[1440px] mx-auto">
-          <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+          <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-12 lg:gap-24">
             <div className="shrink-0">
-              <div className="size-28 lg:size-36 rounded-[40px] bg-primary/10 text-primary flex items-center justify-center shadow-inner">
+              <div className="size-20 sm:size-28 lg:size-36 rounded-[28px] sm:rounded-[40px] bg-primary/10 text-primary flex items-center justify-center shadow-inner">
                 <Building2 size={56} />
               </div>
             </div>
             <div className="space-y-6 max-w-4xl text-center lg:text-left">
-              <h2 className="text-4xl lg:text-6xl font-black font-display tracking-tighter text-gray-900 leading-[0.9]">
+              <h2 className="text-2xl sm:text-3xl lg:text-6xl font-black font-display tracking-tighter text-gray-900 leading-[0.9]">
                 Qui sommes-<span className="text-primary italic">nous ?</span>
               </h2>
               <p className="text-slate-500 text-xl lg:text-2xl font-medium leading-relaxed">
@@ -202,19 +202,19 @@ const Home: React.FC = () => {
       </section>
 
       {/* Brands Slider - Infinite Marquee */}
-      <section className="py-24 bg-slate-800 overflow-hidden relative">
-        <div className="max-w-[1440px] mx-auto px-12 space-y-16 relative z-10">
+      <section className="py-14 sm:py-20 lg:py-24 bg-slate-800 overflow-hidden relative">
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-12 space-y-10 sm:space-y-16 relative z-10">
           <p className="text-center text-slate-300 font-extrabold uppercase tracking-[0.6em] text-[10px]">Leader du marche • Alliances Technologiques Strategiques</p>
 
           <div className="mask-marquee overflow-hidden">
             <div className="flex animate-marquee gap-24 lg:gap-40 items-center grayscale hover:grayscale-0 transition-all duration-700">
               {BRANDS.map((brand, i) => (
-                <span key={`brand1-${i}`} className="text-5xl lg:text-7xl font-black text-white/30 tracking-tighter cursor-default font-display hover:text-primary transition-colors whitespace-nowrap">
+                <span key={`brand1-${i}`} className="text-3xl sm:text-5xl lg:text-7xl font-black text-white/30 tracking-tighter cursor-default font-display hover:text-primary transition-colors whitespace-nowrap">
                   {brand}
                 </span>
               ))}
               {BRANDS.map((brand, i) => (
-                <span key={`brand2-${i}`} className="text-5xl lg:text-7xl font-black text-white/30 tracking-tighter cursor-default font-display hover:text-primary transition-colors whitespace-nowrap">
+                <span key={`brand2-${i}`} className="text-3xl sm:text-5xl lg:text-7xl font-black text-white/30 tracking-tighter cursor-default font-display hover:text-primary transition-colors whitespace-nowrap">
                   {brand}
                 </span>
               ))}
@@ -227,15 +227,15 @@ const Home: React.FC = () => {
 
       {/* Catalogue de produits - 4 derniers */}
       {latestProducts.length > 0 && (
-      <section className="py-40 px-6 lg:px-16 bg-white">
-        <div className="max-w-[1440px] mx-auto space-y-20">
-          <div className="flex flex-col lg:flex-row justify-between items-end gap-12">
-            <div className="max-w-4xl space-y-8">
+      <section className="py-16 sm:py-24 lg:py-40 px-6 lg:px-16 bg-white">
+        <div className="max-w-[1440px] mx-auto space-y-10 sm:space-y-16 lg:space-y-20">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 lg:gap-12">
+            <div className="max-w-4xl space-y-5 sm:space-y-8">
               <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-white border border-gray-100 shadow-premium text-gray-900 text-[11px] font-extrabold uppercase tracking-[0.2em] w-fit">
                 <span className="flex size-2.5 rounded-full bg-primary animate-pulse shadow-glow"></span>
                 Nouveautes
               </div>
-              <h2 className="text-6xl lg:text-[100px] font-black font-display tracking-tighter text-gray-900 leading-[0.85] text-balance">
+              <h2 className="text-3xl sm:text-5xl lg:text-[100px] font-black font-display tracking-tighter text-gray-900 leading-[0.85] text-balance">
                 Catalogue de <span className="text-primary italic">produits.</span>
               </h2>
               <p className="text-slate-500 text-2xl font-medium leading-relaxed max-w-2xl">Les derniers equipements ajoutes a notre stock permanent Abidjan Zone 4.</p>
@@ -307,10 +307,10 @@ const Home: React.FC = () => {
             })}
           </div>
 
-          <div className="flex justify-center pt-8">
+          <div className="flex justify-center pt-4 sm:pt-8">
             <button
               onClick={() => navigate('catalog')}
-              className="flex items-center gap-5 group h-20 px-16 rounded-[32px] bg-primary text-white font-extrabold uppercase tracking-[0.2em] text-[12px] shadow-xl shadow-primary/20 hover:bg-primary-dark hover:-translate-y-1 transition-all active:scale-95"
+              className="flex items-center gap-5 group h-14 sm:h-16 lg:h-20 px-8 sm:px-12 lg:px-16 rounded-[32px] bg-primary text-white font-extrabold uppercase tracking-[0.2em] text-[11px] sm:text-[12px] shadow-xl shadow-primary/20 hover:bg-primary-dark hover:-translate-y-1 transition-all active:scale-95"
             >
               Voir le Catalogue Complet <ArrowUpRight size={22} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
             </button>
@@ -320,18 +320,18 @@ const Home: React.FC = () => {
       )}
 
       {/* Categories Grid - Immersive Bento Style */}
-      <section className="py-40 px-6 lg:px-16 bg-[#fcfcfc]">
-        <div className="max-w-[1440px] mx-auto space-y-32">
-          <div className="flex flex-col lg:flex-row justify-between items-end gap-12">
-            <div className="max-w-4xl space-y-8">
-              <h2 className="text-6xl lg:text-9xl font-black font-display tracking-tighter text-gray-900 leading-[0.8] text-balance">
+      <section className="py-16 sm:py-24 lg:py-40 px-6 lg:px-16 bg-[#fcfcfc]">
+        <div className="max-w-[1440px] mx-auto space-y-12 sm:space-y-20 lg:space-y-32">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 lg:gap-12">
+            <div className="max-w-4xl space-y-5 sm:space-y-8">
+              <h2 className="text-3xl sm:text-5xl lg:text-9xl font-black font-display tracking-tighter text-gray-900 leading-[0.8] text-balance">
                 Maitrisez votre <span className="text-primary italic">Reseau.</span>
               </h2>
               <p className="text-slate-500 text-2xl font-medium leading-relaxed max-w-2xl">L'equipement de reference pour les professionnels exigeants, disponible immediatement a Abidjan.</p>
             </div>
             <button
               onClick={() => navigate('catalog')}
-              className="flex items-center gap-5 group h-20 px-12 rounded-[32px] bg-primary text-white font-extrabold uppercase tracking-[0.2em] text-[11px] shadow-xl shadow-primary/20 hover:bg-primary-dark hover:-translate-y-1 transition-all active:scale-95"
+              className="flex items-center gap-5 group h-14 sm:h-16 lg:h-20 px-8 sm:px-10 lg:px-12 rounded-[32px] bg-primary text-white font-extrabold uppercase tracking-[0.2em] text-[10px] sm:text-[11px] shadow-xl shadow-primary/20 hover:bg-primary-dark hover:-translate-y-1 transition-all active:scale-95"
             >
               Voir le Catalogue Complet <ArrowUpRight size={22} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
             </button>
@@ -345,7 +345,7 @@ const Home: React.FC = () => {
               return (
               <div
                 key={cat.id}
-                className={`group relative rounded-[48px] overflow-hidden cursor-pointer shadow-premium hover:shadow-premium-hover transition-all duration-700 ${lastAloneIn3 ? 'lg:col-span-3 h-[400px]' : 'h-[620px]'} ${lastAloneIn2 ? 'md:col-span-2' : ''} `}
+                className={`group relative rounded-[32px] sm:rounded-[48px] overflow-hidden cursor-pointer shadow-premium hover:shadow-premium-hover transition-all duration-700 ${lastAloneIn3 ? 'lg:col-span-3 h-[250px] sm:h-[320px] lg:h-[400px]' : 'h-[300px] sm:h-[420px] lg:h-[620px]'} ${lastAloneIn2 ? 'md:col-span-2' : ''} `}
                 onClick={() => navigate('catalog', { category: cat.name })}
               >
                 <img className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 text-transparent" src={cat.image} alt={cat.name} />
@@ -368,7 +368,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* Pourquoi choisir BOS ? - 4 Pillars with Parallax */}
-      <section className="py-32 lg:py-40 px-6 lg:px-16 relative overflow-hidden">
+      <section className="py-16 sm:py-24 lg:py-40 px-6 lg:px-16 relative overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=2000')", backgroundAttachment: 'fixed' }}
@@ -382,7 +382,7 @@ const Home: React.FC = () => {
                 <span className="size-2 rounded-full bg-primary animate-pulse shadow-glow"></span>
                 Nos Engagements
               </div>
-              <h2 className="text-5xl lg:text-8xl font-black font-display tracking-tighter text-white leading-[0.85]">
+              <h2 className="text-3xl sm:text-4xl lg:text-8xl font-black font-display tracking-tighter text-white leading-[0.85]">
                 Pourquoi choisir <span className="text-primary italic">BOS ?</span>
               </h2>
             </div>
@@ -422,7 +422,7 @@ const Home: React.FC = () => {
                 key={i}
                 className="group relative bg-white/10 backdrop-blur-md border border-white/15 rounded-[40px] p-10 lg:p-14 flex gap-8 lg:gap-10 items-start hover:bg-white/20 hover:border-primary/30 transition-all duration-700"
               >
-                <span className="text-[80px] lg:text-[100px] font-black font-display leading-none text-white/[0.06] absolute top-6 right-10 select-none group-hover:text-primary/15 transition-colors duration-700">{pillar.num}</span>
+                <span className="text-[50px] sm:text-[70px] lg:text-[100px] font-black font-display leading-none text-white/[0.06] absolute top-6 right-6 sm:right-10 select-none group-hover:text-primary/15 transition-colors duration-700">{pillar.num}</span>
 
                 <div className="size-16 lg:size-20 rounded-[28px] bg-primary/15 text-primary flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-all duration-500">
                   {pillar.icon}
@@ -439,13 +439,13 @@ const Home: React.FC = () => {
       </section>
 
       {/* Core Expertise - Interactive Layout */}
-      <section className="bg-white py-40 px-6 lg:px-16">
-        <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
+      <section className="bg-white py-16 sm:py-24 lg:py-40 px-6 lg:px-16">
+        <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-32 items-center">
           <div className="relative group">
              <div className="rounded-[100px] overflow-hidden shadow-premium-hover border-[20px] border-slate-50 transition-all duration-1000 group-hover:-rotate-1 group-hover:scale-[1.01]">
                 <img src="https://images.unsplash.com/photo-1728743264694-4ac39fa29385?auto=format&fit=crop&q=80&w=1400" alt="Formation BOS-CI Abidjan" className="w-full h-full object-cover" />
              </div>
-             <div className="absolute -bottom-16 -right-12 bg-primary p-16 rounded-[64px] shadow-premium text-white space-y-8 border-[10px] border-white max-w-sm animate-float">
+             <div className="hidden lg:block absolute -bottom-16 -right-12 bg-primary p-10 lg:p-16 rounded-[40px] lg:rounded-[64px] shadow-premium text-white space-y-8 border-[10px] border-white max-w-sm animate-float">
                 <div className="flex items-center gap-8">
                    <div className="size-24 rounded-full bg-white/20 border-4 border-white overflow-hidden shadow-xl shrink-0">
                       <img src="https://i.pravatar.cc/150?u=manager225" alt="Manager BOS-CI" />
@@ -460,12 +460,12 @@ const Home: React.FC = () => {
           </div>
 
           <div className="space-y-16">
-            <h2 className="text-5xl lg:text-7xl font-black font-display tracking-tighter text-gray-900 leading-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-7xl font-black font-display tracking-tighter text-gray-900 leading-tight">
               L'excellence <br className="hidden lg:block"/> sans <span className="text-primary italic">frontieres.</span>
             </h2>
-            <div className="grid grid-cols-1 gap-14">
-              <div className="flex gap-10 group cursor-default">
-                <div className="size-24 rounded-[36px] bg-primary/5 text-primary flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-all duration-700 shadow-inner">
+            <div className="grid grid-cols-1 gap-8 sm:gap-14">
+              <div className="flex gap-6 sm:gap-10 group cursor-default">
+                <div className="size-16 sm:size-20 lg:size-24 rounded-[24px] sm:rounded-[36px] bg-primary/5 text-primary flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-all duration-700 shadow-inner">
                   <ShieldCheck size={44} />
                 </div>
                 <div className="space-y-4">
@@ -473,8 +473,8 @@ const Home: React.FC = () => {
                   <p className="text-slate-500 text-xl leading-relaxed">Unique laboratoire certifie Fujikura en Afrique de l'Ouest. Calibration et remise a neuf immediate.</p>
                 </div>
               </div>
-              <div className="flex gap-10 group cursor-default">
-                <div className="size-24 rounded-[36px] bg-primary/5 text-primary flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-all duration-700 shadow-inner">
+              <div className="flex gap-6 sm:gap-10 group cursor-default">
+                <div className="size-16 sm:size-20 lg:size-24 rounded-[24px] sm:rounded-[36px] bg-primary/5 text-primary flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-all duration-700 shadow-inner">
                   <HardHat size={44} />
                 </div>
                 <div className="space-y-4">
@@ -494,15 +494,15 @@ const Home: React.FC = () => {
       </section>
 
       {/* Blog / Actualites */}
-      <section className="py-40 px-6 lg:px-16 bg-[#fcfcfc]">
-        <div className="max-w-[1440px] mx-auto space-y-24">
-          <div className="flex flex-col lg:flex-row justify-between items-end gap-12">
-            <div className="max-w-3xl space-y-8">
+      <section className="py-16 sm:py-24 lg:py-40 px-6 lg:px-16 bg-[#fcfcfc]">
+        <div className="max-w-[1440px] mx-auto space-y-12 sm:space-y-16 lg:space-y-24">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 lg:gap-12">
+            <div className="max-w-3xl space-y-5 sm:space-y-8">
               <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-white border border-gray-100 shadow-premium text-gray-900 text-[11px] font-extrabold uppercase tracking-[0.2em] w-fit">
                 <span className="flex size-2.5 rounded-full bg-primary animate-pulse shadow-glow"></span>
                 Blog & Actualites
               </div>
-              <h2 className="text-6xl lg:text-[100px] font-black font-display tracking-tighter text-gray-900 leading-[0.85] text-balance">
+              <h2 className="text-3xl sm:text-5xl lg:text-[100px] font-black font-display tracking-tighter text-gray-900 leading-[0.85] text-balance">
                 Les dernieres <span className="text-primary italic">nouvelles.</span>
               </h2>
             </div>
@@ -515,7 +515,7 @@ const Home: React.FC = () => {
                 className="group bg-white rounded-[52px] overflow-hidden shadow-sm border border-gray-100 hover:shadow-premium hover:-translate-y-3 transition-all duration-700 flex flex-col"
               >
                 <div className="h-3 bg-primary/10 group-hover:bg-primary transition-colors duration-500"></div>
-                <div className="p-12 flex flex-col gap-6 flex-1">
+                <div className="p-6 sm:p-10 lg:p-12 flex flex-col gap-6 flex-1">
                   <div className="flex items-center gap-3 text-slate-400">
                     <Calendar size={16} />
                     <span className="text-[12px] font-extrabold uppercase tracking-[0.2em]">{article.date}</span>
@@ -539,29 +539,29 @@ const Home: React.FC = () => {
       </section>
 
       {/* Call to Action - Immersive Dark Surface */}
-      <section className="py-40 px-6 lg:px-16">
-        <div className="max-w-[1440px] mx-auto bg-brand-dark rounded-[100px] p-20 lg:p-40 text-center relative overflow-hidden shadow-premium-hover">
+      <section className="py-16 sm:py-24 lg:py-40 px-6 lg:px-16">
+        <div className="max-w-[1440px] mx-auto bg-brand-dark rounded-[32px] sm:rounded-[60px] lg:rounded-[100px] p-8 sm:p-14 lg:p-40 text-center relative overflow-hidden shadow-premium-hover">
            <div className="absolute top-0 right-0 p-40 opacity-10 pointer-events-none">
               <Globe size={500} className="text-white animate-spin-slow" />
            </div>
 
            <div className="relative z-10 space-y-16 max-w-5xl mx-auto">
-              <h2 className="text-6xl lg:text-[120px] font-black text-white font-display tracking-tighter leading-[0.85] text-balance">
+              <h2 className="text-3xl sm:text-5xl lg:text-[120px] font-black text-white font-display tracking-tighter leading-[0.85] text-balance">
                 Pret pour le <br/> <span className="text-primary italic">prochain saut ?</span>
               </h2>
-              <p className="text-slate-400 text-2xl lg:text-3xl font-medium leading-relaxed max-w-3xl mx-auto text-balance">
+              <p className="text-slate-400 text-lg sm:text-xl lg:text-3xl font-medium leading-relaxed max-w-3xl mx-auto text-balance">
                 Equipez vos chantiers avec le meilleur de la technologie mondiale, supporte localement par des experts.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-8 pt-8">
                 <button
                   onClick={() => navigate('quote')}
-                  className="w-full sm:w-auto h-24 px-20 rounded-[36px] bg-primary text-white font-extrabold uppercase tracking-[0.2em] text-[12px] shadow-[0_30px_60px_-15px_rgba(47,127,52,0.4)] hover:bg-primary-dark transition-all hover:-translate-y-2 active:scale-95"
+                  className="w-full sm:w-auto h-16 sm:h-20 lg:h-24 px-10 sm:px-14 lg:px-20 rounded-[36px] bg-primary text-white font-extrabold uppercase tracking-[0.2em] text-[11px] sm:text-[12px] shadow-[0_30px_60px_-15px_rgba(47,127,52,0.4)] hover:bg-primary-dark transition-all hover:-translate-y-2 active:scale-95"
                 >
                   Demarrer l'Etude
                 </button>
                 <a
                   href="tel:+2252722230639"
-                  className="w-full sm:w-auto h-24 px-16 rounded-[36px] bg-white/5 border border-white/10 text-white font-extrabold uppercase tracking-[0.2em] text-[12px] hover:bg-white/10 transition-all flex items-center justify-center gap-5 hover:scale-105"
+                  className="w-full sm:w-auto h-16 sm:h-20 lg:h-24 px-10 sm:px-12 lg:px-16 rounded-[36px] bg-white/5 border border-white/10 text-white font-extrabold uppercase tracking-[0.2em] text-[11px] sm:text-[12px] hover:bg-white/10 transition-all flex items-center justify-center gap-5 hover:scale-105"
                 >
                   <MapPin size={24} className="text-primary" /> Zone 4, Abidjan
                 </a>

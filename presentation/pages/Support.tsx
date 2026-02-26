@@ -17,20 +17,20 @@ const Support: React.FC = () => {
   return (
     <div className="min-h-screen bg-brand-surface">
       {/* Hero with local Support Agent */}
-      <section className="bg-brand-dark pt-40 pb-32 px-6 relative overflow-hidden">
-        <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10">
+      <section className="bg-brand-dark pt-28 sm:pt-36 lg:pt-40 pb-16 sm:pb-24 lg:pb-32 px-6 relative overflow-hidden">
+        <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center relative z-10">
           <div className="space-y-10">
-            <h1 className="text-5xl lg:text-8xl font-black text-white font-display tracking-tighter leading-none">
+            <h1 className="text-3xl sm:text-4xl lg:text-8xl font-black text-white font-display tracking-tighter leading-none">
               Besoin d'un <br/> <span className="text-primary italic">Expert ?</span>
             </h1>
-            <p className="text-gray-400 text-xl lg:text-2xl max-w-lg font-medium">
+            <p className="text-gray-400 text-lg sm:text-xl lg:text-2xl max-w-lg font-medium">
               Notre équipe technique basée à Abidjan est à votre disposition pour vous accompagner sur tous vos chantiers.
             </p>
             <div className="flex flex-wrap gap-4 pt-4">
-              <a href="https://wa.me/2252722230639" className="h-20 px-10 rounded-[28px] bg-[#25D366] text-white font-extrabold uppercase tracking-widest text-xs flex items-center gap-4 shadow-2xl shadow-green-500/20 hover:scale-105 transition-all">
+              <a href="https://wa.me/2252722230639" className="h-14 sm:h-16 lg:h-20 px-6 sm:px-8 lg:px-10 rounded-[20px] sm:rounded-[24px] lg:rounded-[28px] bg-[#25D366] text-white font-extrabold uppercase tracking-widest text-xs flex items-center gap-4 shadow-2xl shadow-green-500/20 hover:scale-105 transition-all">
                 <MessageCircle size={24} /> WhatsApp Direct
               </a>
-              <a href="tel:+2252722230639" className="h-20 px-10 rounded-[28px] bg-white text-gray-900 font-extrabold uppercase tracking-widest text-xs flex items-center gap-4 shadow-xl hover:bg-gray-50 transition-all">
+              <a href="tel:+2252722230639" className="h-14 sm:h-16 lg:h-20 px-6 sm:px-8 lg:px-10 rounded-[20px] sm:rounded-[24px] lg:rounded-[28px] bg-white text-gray-900 font-extrabold uppercase tracking-widest text-xs flex items-center gap-4 shadow-xl hover:bg-gray-50 transition-all">
                 <Phone size={24} /> +225 27 22 23 06 39
               </a>
             </div>
@@ -53,10 +53,10 @@ const Support: React.FC = () => {
         </div>
       </section>
 
-      <div className="max-w-[1200px] mx-auto px-6 py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
+      <div className="max-w-[1200px] mx-auto px-6 py-16 sm:py-20 lg:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
           <div className="lg:col-span-5 space-y-12">
-            <h2 className="text-4xl lg:text-5xl font-black font-display tracking-tight text-gray-900 leading-none">Questions <span className="text-primary italic">Fréquentes.</span></h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-black font-display tracking-tight text-gray-900 leading-none">Questions <span className="text-primary italic">Fréquentes.</span></h2>
             <div className="space-y-6">
               {faqs.map((faq, i) => (
                 <div key={i} className="bg-white rounded-[32px] border border-gray-100 overflow-hidden shadow-sm transition-all hover:shadow-md">
@@ -78,7 +78,7 @@ const Support: React.FC = () => {
           </div>
 
           <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-8">
-             <div className="p-12 rounded-[52px] bg-white border border-gray-100 shadow-sm flex flex-col gap-10 group hover:border-primary/20 transition-all hover:shadow-2xl">
+             <div className="p-6 sm:p-8 lg:p-12 rounded-[32px] sm:rounded-[40px] lg:rounded-[52px] bg-white border border-gray-100 shadow-sm flex flex-col gap-6 sm:gap-8 lg:gap-10 group hover:border-primary/20 transition-all hover:shadow-2xl">
                 <div className="size-20 rounded-3xl bg-primary/5 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all shadow-inner">
                    <FileText size={40} />
                 </div>
@@ -88,7 +88,7 @@ const Support: React.FC = () => {
                 </div>
                 <button className="text-xs font-extrabold text-primary uppercase tracking-widest hover:underline mt-auto flex items-center gap-2">Documentation →</button>
              </div>
-             <div className="p-12 rounded-[52px] bg-white border border-gray-100 shadow-sm flex flex-col gap-10 group hover:border-primary/20 transition-all hover:shadow-2xl">
+             <div className="p-6 sm:p-8 lg:p-12 rounded-[32px] sm:rounded-[40px] lg:rounded-[52px] bg-white border border-gray-100 shadow-sm flex flex-col gap-6 sm:gap-8 lg:gap-10 group hover:border-primary/20 transition-all hover:shadow-2xl">
                 <div className="size-20 rounded-3xl bg-primary/5 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all shadow-inner">
                    <Info size={40} />
                 </div>

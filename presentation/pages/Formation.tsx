@@ -110,14 +110,14 @@ const Formation: React.FC = () => {
   return (
     <div className="min-h-screen bg-brand-surface">
       {/* Hero Section avec Image Professionnelle Ivoirienne */}
-      <section className="relative pt-40 pb-32 px-6 bg-brand-dark overflow-hidden">
+      <section className="relative pt-28 sm:pt-36 lg:pt-40 pb-16 sm:pb-24 lg:pb-32 px-6 bg-brand-dark overflow-hidden">
         <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center"></div>
-        <div className="max-w-[1440px] mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-          <div className="space-y-8">
+        <div className="max-w-[1440px] mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
+          <div className="space-y-6 sm:space-y-8">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-white text-[10px] font-extrabold uppercase tracking-widest">
               BOS Training Academy
             </div>
-            <h1 className="text-5xl lg:text-8xl font-black text-white font-display tracking-tighter leading-none">
+            <h1 className="text-3xl sm:text-4xl lg:text-8xl font-black text-white font-display tracking-tighter leading-none">
               Propulsez votre <br/> <span className="text-primary italic">Carriere.</span>
             </h1>
             <p className="text-gray-400 text-xl font-medium max-w-lg leading-relaxed">
@@ -140,7 +140,7 @@ const Formation: React.FC = () => {
         </div>
       </section>
 
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-32 space-y-32">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 py-16 sm:py-24 lg:py-32 space-y-16 sm:space-y-24 lg:space-y-32">
         {/* Domaines de Formation */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {modules.map((m) => (
@@ -165,8 +165,8 @@ const Formation: React.FC = () => {
         </div>
 
         {/* Calendar / Prochaines sessions */}
-        <div className="bg-[#f0f9f1] py-20" style={{ marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)', width: '100vw' }}>
-        <div ref={sessionsRef} className="max-w-[1440px] mx-auto px-6 lg:px-12 relative overflow-hidden">
+        <div className="bg-[#f0f9f1] py-12 sm:py-16 lg:py-20" style={{ marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)', width: '100vw' }}>
+        <div ref={sessionsRef} className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 relative overflow-hidden">
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16">
             <div className="lg:col-span-4 space-y-8">
@@ -277,7 +277,7 @@ const Formation: React.FC = () => {
               <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-extrabold uppercase tracking-[0.3em]">
                 <ShieldCheck size={14} /> Reconnu par les operateurs
               </div>
-              <h2 className="text-4xl lg:text-6xl font-black font-display tracking-tight text-gray-900">Certifications <span className="italic text-primary">Delivrees.</span></h2>
+              <h2 className="text-2xl sm:text-3xl lg:text-6xl font-black font-display tracking-tight text-gray-900">Certifications <span className="italic text-primary">Delivrees.</span></h2>
               <p className="text-gray-500 text-xl font-medium max-w-2xl mx-auto leading-relaxed">
                 Nos formations delivrent des certifications reconnues par les operateurs et conformes aux normes internationales.
               </p>
@@ -303,7 +303,7 @@ const Formation: React.FC = () => {
 
         {/* Testimonials with Local Faces */}
         <section className="py-20 text-center space-y-20">
-          <h2 className="text-4xl lg:text-6xl font-black font-display tracking-tight text-gray-900">Ils nous font <span className="text-primary italic">confiance.</span></h2>
+          <h2 className="text-2xl sm:text-3xl lg:text-6xl font-black font-display tracking-tight text-gray-900">Ils nous font <span className="text-primary italic">confiance.</span></h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {[1, 2, 3].map((_, i) => (
               <div key={i} className="bg-white p-12 rounded-[52px] shadow-sm border border-gray-100 flex flex-col items-center gap-8">
@@ -323,13 +323,13 @@ const Formation: React.FC = () => {
         {/* Registration Form */}
         <section ref={formRef} className="space-y-16">
           <div className="text-center space-y-6">
-            <h2 className="text-4xl lg:text-6xl font-black font-display tracking-tight text-gray-900">Inscrivez-vous a une <span className="text-primary italic">formation.</span></h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-6xl font-black font-display tracking-tight text-gray-900">Inscrivez-vous a une <span className="text-primary italic">formation.</span></h2>
             <p className="text-gray-500 text-xl font-medium max-w-2xl mx-auto leading-relaxed">
               Remplissez le formulaire ci-dessous et notre equipe vous recontactera dans les meilleurs delais.
             </p>
           </div>
 
-          <div className="max-w-3xl mx-auto bg-white rounded-[52px] shadow-premium border border-gray-100 p-12 lg:p-20">
+          <div className="max-w-3xl mx-auto bg-white rounded-[28px] sm:rounded-[40px] lg:rounded-[52px] shadow-premium border border-gray-100 p-6 sm:p-10 lg:p-20">
             <form onSubmit={handleRegSubmit} className="space-y-10">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <div className="space-y-5">
@@ -413,7 +413,7 @@ const Formation: React.FC = () => {
 
           {/* Modal Content */}
           <div
-            className="relative bg-white w-full max-w-2xl rounded-[48px] shadow-2xl p-10 lg:p-14 animate-slide-up max-h-[90vh] overflow-y-auto no-scrollbar border border-slate-100"
+            className="relative bg-white w-full max-w-2xl rounded-[28px] sm:rounded-[40px] lg:rounded-[48px] shadow-2xl p-6 sm:p-10 lg:p-14 animate-slide-up max-h-[90vh] overflow-y-auto no-scrollbar border border-slate-100"
             onClick={e => e.stopPropagation()}
           >
             {/* Close button */}

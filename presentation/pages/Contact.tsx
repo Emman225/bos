@@ -43,18 +43,18 @@ const Contact: React.FC = () => {
   return (
     <div className="min-h-screen bg-brand-surface">
       {/* Hero Section */}
-      <section className="bg-brand-dark py-40 px-6 relative overflow-hidden">
+      <section className="bg-brand-dark py-28 sm:py-32 lg:py-40 px-6 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center"></div>
-        <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10">
-          <div className="space-y-12 animate-fade-in">
+        <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center relative z-10">
+          <div className="space-y-8 sm:space-y-12 animate-fade-in">
             <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-white/5 text-primary-light text-[11px] font-extrabold uppercase tracking-[0.2em] border border-white/10">
               <span className="size-2.5 rounded-full bg-primary-light animate-pulse shadow-glow"></span>
               Siege Social Abidjan Zone 4
             </div>
-            <h1 className="text-6xl lg:text-9xl font-black text-white font-display tracking-tighter leading-[0.8] text-balance">
+            <h1 className="text-3xl sm:text-5xl lg:text-9xl font-black text-white font-display tracking-tighter leading-[0.8] text-balance">
               Parlons de <br/> <span className="text-primary italic">vos projets.</span>
             </h1>
-            <p className="text-slate-400 text-2xl lg:text-3xl max-w-lg leading-relaxed font-medium">
+            <p className="text-slate-400 text-lg sm:text-xl lg:text-3xl max-w-lg leading-relaxed font-medium">
               Nos experts en infrastructure sont a votre ecoute pour deployer le meilleur de la technologie.
             </p>
           </div>
@@ -71,11 +71,11 @@ const Contact: React.FC = () => {
         </div>
       </section>
 
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-16 -mt-32 pb-40 relative z-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-16 -mt-16 sm:-mt-24 lg:-mt-32 pb-16 sm:pb-24 lg:pb-40 relative z-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16">
           {/* Info Cards */}
           <div className="lg:col-span-4 space-y-10">
-            <div className="bg-white p-12 lg:p-16 rounded-[64px] shadow-premium border border-gray-100 space-y-16">
+            <div className="bg-white p-6 sm:p-10 lg:p-16 rounded-[32px] sm:rounded-[48px] lg:rounded-[64px] shadow-premium border border-gray-100 space-y-10 sm:space-y-16">
               <div className="space-y-12">
                 <h3 className="text-3xl font-black text-gray-900 font-display tracking-tight border-b border-slate-50 pb-10">Nos Canaux.</h3>
 
@@ -111,21 +111,21 @@ const Contact: React.FC = () => {
               </div>
 
               <div className="pt-10 border-t border-slate-50 flex gap-4 flex-wrap">
-                 <button className="flex-1 min-w-[60px] h-20 bg-brand-dark rounded-[24px] flex items-center justify-center text-white hover:bg-slate-800 transition-all shadow-lg active:scale-95"><Globe size={22} /></button>
-                 <button className="flex-1 min-w-[60px] h-20 bg-[#25D366] rounded-[24px] flex items-center justify-center text-white hover:scale-105 transition-all shadow-lg active:scale-95 shadow-green-500/20"><MessageSquare size={22} /></button>
-                 <button className="flex-1 min-w-[60px] h-20 bg-[#0A66C2] rounded-[24px] flex items-center justify-center text-white hover:scale-105 transition-all shadow-lg active:scale-95 shadow-blue-500/20"><Linkedin size={22} /></button>
-                 <button className="flex-1 min-w-[60px] h-20 bg-[#1877F2] rounded-[24px] flex items-center justify-center text-white hover:scale-105 transition-all shadow-lg active:scale-95 shadow-blue-400/20"><Facebook size={22} /></button>
-                 <button className="flex-1 min-w-[60px] h-20 bg-[#1DA1F2] rounded-[24px] flex items-center justify-center text-white hover:scale-105 transition-all shadow-lg active:scale-95 shadow-sky-400/20"><Twitter size={22} /></button>
+                 <button className="flex-1 min-w-[48px] h-14 sm:h-16 lg:h-20 bg-brand-dark rounded-[20px] sm:rounded-[24px] flex items-center justify-center text-white hover:bg-slate-800 transition-all shadow-lg active:scale-95"><Globe size={22} /></button>
+                 <button className="flex-1 min-w-[48px] h-14 sm:h-16 lg:h-20 bg-[#25D366] rounded-[20px] sm:rounded-[24px] flex items-center justify-center text-white hover:scale-105 transition-all shadow-lg active:scale-95 shadow-green-500/20"><MessageSquare size={22} /></button>
+                 <button className="flex-1 min-w-[48px] h-14 sm:h-16 lg:h-20 bg-[#0A66C2] rounded-[20px] sm:rounded-[24px] flex items-center justify-center text-white hover:scale-105 transition-all shadow-lg active:scale-95 shadow-blue-500/20"><Linkedin size={22} /></button>
+                 <button className="flex-1 min-w-[48px] h-14 sm:h-16 lg:h-20 bg-[#1877F2] rounded-[20px] sm:rounded-[24px] flex items-center justify-center text-white hover:scale-105 transition-all shadow-lg active:scale-95 shadow-blue-400/20"><Facebook size={22} /></button>
+                 <button className="flex-1 min-w-[48px] h-14 sm:h-16 lg:h-20 bg-[#1DA1F2] rounded-[20px] sm:rounded-[24px] flex items-center justify-center text-white hover:scale-105 transition-all shadow-lg active:scale-95 shadow-sky-400/20"><Twitter size={22} /></button>
               </div>
             </div>
           </div>
 
           {/* Contact Form */}
           <div className="lg:col-span-8">
-            <div className="bg-white rounded-[72px] shadow-premium border border-gray-100 overflow-hidden">
-              <div className="p-12 lg:p-16 space-y-12">
+            <div className="bg-white rounded-[32px] sm:rounded-[48px] lg:rounded-[72px] shadow-premium border border-gray-100 overflow-hidden">
+              <div className="p-6 sm:p-10 lg:p-16 space-y-8 sm:space-y-12">
                 <div className="space-y-4">
-                  <h3 className="text-4xl font-black text-gray-900 font-display tracking-tighter">Echangez avec nos experts.</h3>
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 font-display tracking-tighter">Echangez avec nos experts.</h3>
                   <p className="text-slate-500 text-lg font-medium">Reponse garantie sous 2 heures ouvrables.</p>
                 </div>
 
@@ -205,11 +205,12 @@ const Contact: React.FC = () => {
         </div>
 
         {/* Google Maps - Pleine largeur */}
-        <div className="mt-20 bg-white rounded-[52px] shadow-premium border border-gray-100 overflow-hidden">
+        <div className="mt-10 sm:mt-16 lg:mt-20 bg-white rounded-[24px] sm:rounded-[36px] lg:rounded-[52px] shadow-premium border border-gray-100 overflow-hidden">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.5!2d-3.99!3d5.32!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMTknMTIuMCJOIDPCsDU5JzI0LjAiVw!5e0!3m2!1sfr!2sci!4v1"
             width="100%"
-            height="400"
+            height="300"
+            className="h-[250px] sm:h-[300px] lg:h-[400px]"
             style={{ border: 0 }}
             allowFullScreen
             loading="lazy"

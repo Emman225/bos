@@ -27,12 +27,12 @@ const QuoteForm: React.FC = () => {
   if (isSuccess) {
     return (
       <div className="min-h-screen bg-primary-surface flex items-center justify-center p-6">
-        <div className="max-w-2xl w-full bg-white rounded-[80px] p-20 text-center shadow-premium-hover border border-gray-100 space-y-12 animate-fade-in">
-          <div className="size-32 bg-primary text-white rounded-[48px] mx-auto flex items-center justify-center shadow-glow rotate-6 transform transition-transform hover:rotate-0">
-            <CheckCircle2 size={64} />
+        <div className="max-w-2xl w-full bg-white rounded-[32px] sm:rounded-[52px] lg:rounded-[80px] p-8 sm:p-14 lg:p-20 text-center shadow-premium-hover border border-gray-100 space-y-8 sm:space-y-12 animate-fade-in">
+          <div className="size-20 sm:size-28 lg:size-32 bg-primary text-white rounded-[32px] sm:rounded-[40px] lg:rounded-[48px] mx-auto flex items-center justify-center shadow-glow rotate-6 transform transition-transform hover:rotate-0">
+            <CheckCircle2 size={48} className="sm:hidden" /><CheckCircle2 size={64} className="hidden sm:block" />
           </div>
-          <div className="space-y-6">
-            <h2 className="text-5xl font-black text-gray-900 font-display tracking-tight leading-tight">Demande transmise avec succès !</h2>
+          <div className="space-y-4 sm:space-y-6">
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-black text-gray-900 font-display tracking-tight leading-tight">Demande transmise avec succès !</h2>
             <p className="text-gray-500 text-xl font-medium leading-relaxed">
               Un ingénieur BOS-CI va analyser votre sélection. Un devis complet vous sera adressé sous <span className="text-primary font-extrabold">24 heures</span>.
             </p>
@@ -40,7 +40,7 @@ const QuoteForm: React.FC = () => {
           <div className="pt-10 flex flex-col gap-5">
             <button
               onClick={() => navigate('home')}
-              className="w-full h-24 bg-brand-dark text-white rounded-[36px] font-extrabold uppercase tracking-[0.2em] text-sm flex items-center justify-center gap-4 hover:bg-gray-800 transition-all shadow-xl active:scale-95"
+              className="w-full h-16 sm:h-20 lg:h-24 bg-brand-dark text-white rounded-[28px] sm:rounded-[36px] font-extrabold uppercase tracking-[0.2em] text-xs sm:text-sm flex items-center justify-center gap-4 hover:bg-gray-800 transition-all shadow-xl active:scale-95"
             >
               <Home size={22} /> Retour à l'accueil
             </button>
@@ -51,30 +51,30 @@ const QuoteForm: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-primary-surface pt-40 pb-32">
-      <div className="max-w-[1200px] mx-auto px-6">
+    <div className="min-h-screen bg-primary-surface pt-28 sm:pt-36 lg:pt-40 pb-16 sm:pb-24 lg:pb-32">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
         {/* Elite Stepper */}
-        <div className="flex items-center justify-center gap-6 mb-24">
+        <div className="flex items-center justify-center gap-3 sm:gap-6 mb-12 sm:mb-16 lg:mb-24">
           {[1, 2].map((s) => (
             <React.Fragment key={s}>
-              <div className="flex flex-col items-center gap-4">
-                <div className={`size-20 rounded-[32px] flex items-center justify-center font-extrabold text-xl transition-all duration-700 ${step >= s ? 'bg-primary text-white shadow-glow' : 'bg-white text-gray-300 border-2 border-gray-100'}`}>
-                  {s === 1 ? <Package size={28} /> : <UserCheck size={28} />}
+              <div className="flex flex-col items-center gap-3 sm:gap-4">
+                <div className={`size-14 sm:size-16 lg:size-20 rounded-[20px] sm:rounded-[28px] lg:rounded-[32px] flex items-center justify-center font-extrabold text-xl transition-all duration-700 ${step >= s ? 'bg-primary text-white shadow-glow' : 'bg-white text-gray-300 border-2 border-gray-100'}`}>
+                  {s === 1 ? <Package size={22} /> : <UserCheck size={22} />}
                 </div>
-                <span className={`text-[11px] font-extrabold uppercase tracking-[0.2em] ${step >= s ? 'text-primary' : 'text-gray-300'}`}>
+                <span className={`text-[10px] sm:text-[11px] font-extrabold uppercase tracking-[0.2em] ${step >= s ? 'text-primary' : 'text-gray-300'}`}>
                   {s === 1 ? 'Articles' : 'Contact'}
                 </span>
               </div>
-              {s === 1 && <div className={`w-24 h-2 rounded-full transition-all duration-700 ${step > 1 ? 'bg-primary' : 'bg-gray-100'}`}></div>}
+              {s === 1 && <div className={`w-12 sm:w-16 lg:w-24 h-2 rounded-full transition-all duration-700 ${step > 1 ? 'bg-primary' : 'bg-gray-100'}`}></div>}
             </React.Fragment>
           ))}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-start">
           {/* Main Form Area */}
           <div className="lg:col-span-8 space-y-10">
-            <div className="bg-white rounded-[64px] shadow-premium border border-gray-100 overflow-hidden">
-              <div className="p-12 lg:p-20">
+            <div className="bg-white rounded-[28px] sm:rounded-[44px] lg:rounded-[64px] shadow-premium border border-gray-100 overflow-hidden">
+              <div className="p-4 sm:p-8 lg:p-20">
                 {step === 1 ? (
                   <div className="space-y-12 animate-fade-in">
                     <div className="flex items-center justify-between">
@@ -87,13 +87,13 @@ const QuoteForm: React.FC = () => {
                     {quoteItems.length > 0 ? (
                       <div className="space-y-6">
                         {quoteItems.map((item) => (
-                          <div key={item.product.id} className="group relative flex items-center gap-10 p-8 bg-slate-50/50 rounded-[44px] border border-gray-100 hover:border-primary/20 hover:bg-white transition-all duration-500">
-                            <div className="size-32 bg-white rounded-[32px] p-6 shrink-0 shadow-sm border border-gray-100 flex items-center justify-center">
+                          <div key={item.product.id} className="group relative flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 lg:gap-10 p-4 sm:p-6 lg:p-8 bg-slate-50/50 rounded-[24px] sm:rounded-[32px] lg:rounded-[44px] border border-gray-100 hover:border-primary/20 hover:bg-white transition-all duration-500">
+                            <div className="size-20 sm:size-24 lg:size-32 bg-white rounded-[20px] sm:rounded-[28px] lg:rounded-[32px] p-4 sm:p-6 shrink-0 shadow-sm border border-gray-100 flex items-center justify-center">
                               <img src={item.product.image} className="w-full h-full object-contain mix-blend-multiply transition-transform group-hover:scale-110" alt={item.product.name} />
                             </div>
                             <div className="flex-1 min-w-0 space-y-2">
                               <span className="text-[10px] font-extrabold text-primary uppercase tracking-[0.2em]">{item.product.brand}</span>
-                              <h4 className="font-extrabold text-gray-900 text-2xl leading-tight truncate">{item.product.name}</h4>
+                              <h4 className="font-extrabold text-gray-900 text-base sm:text-lg lg:text-2xl leading-tight truncate">{item.product.name}</h4>
                               {settings.show_product_prices && item.product.price != null && (
                                 <div className="flex items-center gap-3">
                                   <span className="text-lg font-black text-primary font-display">{formatPrice(item.product.price)}</span>
@@ -202,7 +202,7 @@ const QuoteForm: React.FC = () => {
                 )}
               </div>
 
-              <div className="p-12 lg:p-16 bg-slate-50/50 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-10">
+              <div className="p-4 sm:p-8 lg:p-16 bg-slate-50/50 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-6 sm:gap-10">
                 <button
                   className={`flex items-center gap-3 font-extrabold text-[11px] uppercase tracking-widest transition-all ${step === 1 ? 'opacity-0 pointer-events-none' : 'text-gray-400 hover:text-gray-900'}`}
                   onClick={() => setStep(1)}
@@ -210,7 +210,7 @@ const QuoteForm: React.FC = () => {
                   <ChevronLeft size={20} /> Retour
                 </button>
                 <button
-                  className="flex items-center justify-center gap-6 w-full sm:w-auto px-20 h-24 rounded-[36px] bg-primary text-white font-extrabold text-sm uppercase tracking-[0.2em] shadow-glow hover:bg-primary-dark transition-all transform active:scale-95 disabled:opacity-50 disabled:grayscale"
+                  className="flex items-center justify-center gap-4 sm:gap-6 w-full sm:w-auto px-8 sm:px-12 lg:px-20 h-14 sm:h-16 lg:h-24 rounded-[28px] sm:rounded-[36px] bg-primary text-white font-extrabold text-xs sm:text-sm uppercase tracking-[0.2em] shadow-glow hover:bg-primary-dark transition-all transform active:scale-95 disabled:opacity-50 disabled:grayscale"
                   onClick={async () => {
                     if(step === 2) {
                       if (!formData.company.trim() || !formData.name.trim() || !formData.email.trim() || !formData.phone.trim()) {
@@ -247,8 +247,8 @@ const QuoteForm: React.FC = () => {
           </div>
 
           {/* Luxury Summary Sidebar */}
-          <div className="lg:col-span-4 space-y-10 sticky top-40">
-            <div className="bg-brand-dark rounded-[56px] p-12 text-white space-y-10 shadow-premium relative overflow-hidden group">
+          <div className="lg:col-span-4 space-y-6 sm:space-y-10 lg:sticky lg:top-40">
+            <div className="bg-brand-dark rounded-[28px] sm:rounded-[40px] lg:rounded-[56px] p-6 sm:p-8 lg:p-12 text-white space-y-6 sm:space-y-10 shadow-premium relative overflow-hidden group">
                <div className="absolute top-0 right-0 p-12 opacity-5 transition-transform duration-1000 group-hover:scale-110">
                   <Globe size={240} className="animate-spin-slow" />
                </div>

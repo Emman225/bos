@@ -1,15 +1,15 @@
 
-import React, { useState, useMemo, useEffect, useRef } from 'react';
-import { Search, SlidersHorizontal, Package, ArrowRight, Sparkles, Send, ShoppingCart, ImageIcon, ChevronLeft, ChevronRight, RotateCcw, Bot, User } from 'lucide-react';
+import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
+import { Search, SlidersHorizontal, Package, ArrowRight, Sparkles, Send, ShoppingCart, ImageIcon, ChevronLeft, ChevronRight, RotateCcw, Bot, User, Zap, Truck, Award, Star } from 'lucide-react';
 import { Product, Category } from '../../domain/entities';
 import { useAppContext } from '../context/AppProvider';
 import { useQuote } from '../hooks/useQuote';
 import { formatPrice } from '../utils/formatPrice';
 
 const ProductRow: React.FC<{ product: Product; imageCount: number; navigate: (page: string, params?: any) => void; addToQuote: (p: Product) => void; showPrices: boolean }> = ({ product, imageCount, navigate, addToQuote, showPrices }) => (
-  <div className="group bg-white rounded-[32px] border border-slate-100 overflow-hidden flex flex-row shadow-premium hover:shadow-premium-hover hover:border-primary/20 transition-all duration-500">
-    <div className="w-[280px] shrink-0 bg-slate-50 relative overflow-hidden cursor-pointer rounded-2xl m-4" onClick={() => navigate('product', { productId: product.id })}>
-      <img className="w-full h-full object-contain mix-blend-multiply p-8 transition-all duration-700 group-hover:scale-110" src={product.image} alt={product.name} />
+  <div className="group bg-white rounded-[24px] sm:rounded-[32px] border border-slate-100 overflow-hidden flex flex-col sm:flex-row shadow-premium hover:shadow-premium-hover hover:border-primary/20 transition-all duration-500">
+    <div className="w-full sm:w-[200px] lg:w-[280px] shrink-0 bg-slate-50 relative overflow-hidden cursor-pointer rounded-2xl m-3 sm:m-4 aspect-square sm:aspect-auto" onClick={() => navigate('product', { productId: product.id })}>
+      <img className="w-full h-full object-contain mix-blend-multiply p-6 sm:p-8 transition-all duration-700 group-hover:scale-110" src={product.image} alt={product.name} />
       <div className="absolute top-4 left-4 flex flex-col gap-1.5">
         {product.isNew && (
           <div className="flex items-center gap-1.5 bg-primary text-white px-3 py-1 rounded-full shadow-glow">
@@ -30,8 +30,8 @@ const ProductRow: React.FC<{ product: Product; imageCount: number; navigate: (pa
         </div>
       )}
     </div>
-    <div className="flex-1 p-8 flex items-center gap-8">
-      <div className="flex-1 space-y-3 min-w-0">
+    <div className="flex-1 p-4 sm:p-6 lg:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
+      <div className="flex-1 space-y-2 sm:space-y-3 min-w-0">
         <div className="flex items-center gap-3">
           <span className="flex items-center gap-1.5 text-[10px] font-extrabold text-primary uppercase tracking-[0.3em]">
             <span className="size-1.5 rounded-full bg-primary"></span>
@@ -44,18 +44,18 @@ const ProductRow: React.FC<{ product: Product; imageCount: number; navigate: (pa
             </span>
           )}
         </div>
-        <h3 className="font-black text-gray-900 text-lg leading-tight font-display tracking-tight cursor-pointer hover:text-primary transition-colors" onClick={() => navigate('product', { productId: product.id })}>{product.name}</h3>
+        <h3 className="font-black text-gray-900 text-base sm:text-lg leading-tight font-display tracking-tight cursor-pointer hover:text-primary transition-colors" onClick={() => navigate('product', { productId: product.id })}>{product.name}</h3>
         <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Ref: {product.ref}</p>
-        <p className="text-sm text-slate-500 font-medium line-clamp-2 leading-relaxed">{product.description}</p>
+        <p className="text-sm text-slate-500 font-medium line-clamp-2 leading-relaxed hidden sm:block">{product.description}</p>
         {showPrices && product.price != null && (
-          <p className="text-2xl font-black text-primary font-display">{formatPrice(product.price)}</p>
+          <p className="text-xl sm:text-2xl font-black text-primary font-display">{formatPrice(product.price)}</p>
         )}
       </div>
-      <div className="flex flex-col gap-3 shrink-0">
-        <button className="bg-primary text-white h-14 px-8 rounded-2xl font-extrabold text-[10px] uppercase tracking-[0.15em] shadow-glow hover:bg-primary-dark transition-all flex items-center justify-center gap-3 active:scale-95" onClick={() => addToQuote(product)}>
+      <div className="flex flex-row sm:flex-col gap-3 shrink-0 w-full sm:w-auto">
+        <button className="bg-primary text-white h-12 sm:h-14 px-4 sm:px-8 rounded-2xl font-extrabold text-[10px] uppercase tracking-[0.15em] shadow-glow hover:bg-primary-dark transition-all flex items-center justify-center gap-2 sm:gap-3 active:scale-95 flex-1 sm:flex-initial" onClick={() => addToQuote(product)}>
           {showPrices && product.price != null ? 'Ajouter' : 'Devis'} <ShoppingCart size={16} />
         </button>
-        <button className="h-14 px-8 rounded-2xl bg-brand-dark text-white flex items-center justify-center gap-2 hover:bg-gray-800 transition-all text-[10px] font-extrabold uppercase tracking-widest active:scale-95" onClick={() => navigate('product', { productId: product.id })}>
+        <button className="h-12 sm:h-14 px-4 sm:px-8 rounded-2xl bg-brand-dark text-white flex items-center justify-center gap-2 hover:bg-gray-800 transition-all text-[10px] font-extrabold uppercase tracking-widest active:scale-95 flex-1 sm:flex-initial" onClick={() => navigate('product', { productId: product.id })}>
           Détails <ArrowRight size={16} />
         </button>
       </div>
@@ -83,6 +83,68 @@ const Catalog: React.FC = () => {
   const [aiMessages, setAiMessages] = useState<{ role: 'user' | 'ai'; text: string }[]>([]);
   const [isAiLoading, setIsAiLoading] = useState(false);
   const aiChatRef = useRef<HTMLDivElement>(null);
+
+  // Slider
+  const [sliderIndex, setSliderIndex] = useState(0);
+  const sliderTimer = useRef<ReturnType<typeof setInterval> | null>(null);
+  const SLIDES_COUNT = 4;
+
+  const heroSlides = [
+    {
+      tag: 'Nouveautés',
+      title: 'Découvrez nos\ndernières références',
+      subtitle: 'Les technologies les plus récentes pour vos infrastructures réseau, disponibles en stock à Abidjan.',
+      cta: 'Explorer le catalogue',
+      bg: 'from-[#0a1628] via-[#162850] to-[#0d2137]',
+      accent: 'from-primary to-blue-400',
+      icon: Zap,
+      decorColor: 'bg-primary/20',
+    },
+    {
+      tag: 'Stock permanent',
+      title: 'Livraison express\nAbidjan Zone 4',
+      subtitle: 'Disponibilité immédiate sur des centaines de références. Retrait en agence ou livraison le jour même.',
+      cta: 'Voir les disponibilités',
+      bg: 'from-[#0f2027] via-[#203a43] to-[#2c5364]',
+      accent: 'from-emerald-400 to-teal-500',
+      icon: Truck,
+      decorColor: 'bg-emerald-400/20',
+    },
+    {
+      tag: 'Qualité certifiée',
+      title: 'Les plus grandes\nmarques du secteur',
+      subtitle: 'Équipements professionnels certifiés des leaders mondiaux du réseau et de la fibre optique.',
+      cta: 'Nos marques partenaires',
+      bg: 'from-[#1a0a2e] via-[#2d1b69] to-[#16213e]',
+      accent: 'from-violet-400 to-purple-500',
+      icon: Award,
+      decorColor: 'bg-violet-400/20',
+    },
+    {
+      tag: 'Sur mesure',
+      title: 'Solutions clé en main\npour vos projets',
+      subtitle: 'Conseil expert, devis personnalisé et accompagnement technique pour chaque projet d\'envergure.',
+      cta: 'Demander un devis',
+      bg: 'from-[#1c1107] via-[#3d2508] to-[#1a1a2e]',
+      accent: 'from-amber-400 to-orange-500',
+      icon: Star,
+      decorColor: 'bg-amber-400/20',
+    },
+  ];
+
+  const startAutoplay = useCallback(() => {
+    if (sliderTimer.current) clearInterval(sliderTimer.current);
+    sliderTimer.current = setInterval(() => {
+      setSliderIndex(prev => (prev + 1) % SLIDES_COUNT);
+    }, 6000);
+  }, []);
+
+  useEffect(() => {
+    startAutoplay();
+    return () => { if (sliderTimer.current) clearInterval(sliderTimer.current); };
+  }, [startAutoplay]);
+
+  const goToSlide = (i: number) => { setSliderIndex(i); startAutoplay(); };
 
   const aiSuggestions = [
     'Équiper 3 techniciens fibre optique FTTH',
@@ -146,125 +208,95 @@ const Catalog: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white pb-40">
-      <section className="bg-brand-dark pt-40 pb-56 px-6 lg:px-16 relative overflow-hidden">
-        <div className="absolute top-0 right-0 p-40 opacity-5 pointer-events-none">
-           <Package size={500} className="text-white rotate-12" />
-        </div>
-        <div className="max-w-[1440px] mx-auto space-y-10 relative z-10">
-          <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-white/5 border border-white/10 text-primary-light text-[11px] font-extrabold uppercase tracking-[0.2em]">
-            <span className="size-2.5 rounded-full bg-primary animate-pulse shadow-glow"></span>
-            Stock Permanent Abidjan Zone 4
+      {/* Hero Slider */}
+      <section className="relative overflow-hidden">
+        <div className="overflow-hidden">
+          <div className="flex transition-transform duration-700 ease-out" style={{ transform: `translateX(-${sliderIndex * 100}%)` }}>
+            {heroSlides.map((slide, idx) => {
+              const Icon = slide.icon;
+              return (
+                <div key={idx} className={`w-full shrink-0 bg-gradient-to-br ${slide.bg}`}>
+                  <div className="relative pt-28 pb-20 sm:pt-32 sm:pb-28 lg:pt-36 lg:pb-48 px-6 lg:px-16 overflow-hidden">
+                    {/* Decorative elements */}
+                    <div className={`absolute -top-20 -right-20 size-[400px] ${slide.decorColor} rounded-full blur-[120px]`}></div>
+                    <div className={`absolute -bottom-20 -left-20 size-[300px] ${slide.decorColor} rounded-full blur-[100px]`}></div>
+                    <div className="absolute top-10 right-10 opacity-[0.03]">
+                      <Icon size={350} className="text-white rotate-12" />
+                    </div>
+
+                    <div className="max-w-[1440px] mx-auto relative z-10 flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
+                      {/* Text */}
+                      <div className="w-full lg:w-[65%] space-y-5">
+                        <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10">
+                          <span className={`size-2 rounded-full bg-gradient-to-r ${slide.accent} animate-pulse`}></span>
+                          <span className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-white/70">{slide.tag}</span>
+                        </div>
+                        <h1 className="text-xl sm:text-2xl lg:text-5xl xl:text-6xl font-black text-white font-display tracking-tighter leading-[0.95] whitespace-pre-line">
+                          {slide.title}
+                        </h1>
+                        <p className="text-slate-400 text-base lg:text-lg font-medium max-w-xl leading-relaxed">{slide.subtitle}</p>
+                        <button
+                          onClick={() => window.scrollTo({ top: 600, behavior: 'smooth' })}
+                          className={`inline-flex items-center gap-3 h-12 px-8 rounded-2xl bg-gradient-to-r ${slide.accent} text-white font-extrabold text-[10px] uppercase tracking-[0.15em] shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all active:scale-95`}
+                        >
+                          {slide.cta} <ArrowRight size={16} />
+                        </button>
+                      </div>
+
+                      {/* Visual */}
+                      <div className="hidden lg:flex w-full lg:w-[35%] items-center justify-center">
+                        <div className={`relative size-48 lg:size-56 rounded-full bg-gradient-to-br ${slide.accent} opacity-10 blur-2xl absolute`}></div>
+                        <div className="relative size-36 lg:size-44 rounded-[32px] bg-white/5 border border-white/10 backdrop-blur-sm flex items-center justify-center">
+                          <Icon size={56} className={`text-white/80`} strokeWidth={1.2} />
+                          <div className={`absolute -top-3 -right-3 size-12 rounded-xl bg-gradient-to-br ${slide.accent} flex items-center justify-center shadow-lg`}>
+                            <Sparkles size={18} className="text-white" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
-          <h1 className="text-7xl lg:text-[110px] font-black text-white font-display tracking-tighter leading-[0.85] text-balance">
-            Solutions <br/> <span className="text-primary italic">Elite.</span>
-          </h1>
-          <p className="text-slate-400 text-2xl font-medium max-w-3xl leading-relaxed">Le standard industriel pour les réseaux critiques, supporté localement.</p>
+        </div>
+
+        {/* Arrows */}
+        <button
+          onClick={() => goToSlide((sliderIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT)}
+          className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 size-12 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/20 transition-all active:scale-90 z-20"
+        >
+          <ChevronLeft size={20} />
+        </button>
+        <button
+          onClick={() => goToSlide((sliderIndex + 1) % SLIDES_COUNT)}
+          className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 size-12 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/20 transition-all active:scale-90 z-20"
+        >
+          <ChevronRight size={20} />
+        </button>
+
+        {/* Dots */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2.5 z-20">
+          {heroSlides.map((slide, i) => (
+            <button
+              key={i}
+              onClick={() => goToSlide(i)}
+              className={`rounded-full transition-all duration-500 ${i === sliderIndex ? `w-10 h-3 bg-gradient-to-r ${slide.accent} shadow-lg` : 'size-3 bg-white/20 hover:bg-white/40'}`}
+            />
+          ))}
         </div>
       </section>
 
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-16 -mt-36 relative z-20">
-        <div className="flex flex-col lg:flex-row gap-16">
-          <aside className="w-full lg:w-[380px] shrink-0 space-y-12">
-            <div className="bg-white rounded-[56px] shadow-premium border border-slate-50 overflow-hidden">
-              {/* Header */}
-              <div className="p-10 pb-0">
-                <div className="flex items-center gap-5">
-                  <div className="size-14 rounded-[20px] bg-gradient-to-br from-primary to-primary-dark text-white flex items-center justify-center shadow-glow">
-                    <Sparkles size={26} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-black text-base text-gray-900 font-display leading-none">Conseiller IA</h3>
-                    <p className="text-[10px] font-extrabold text-slate-400 uppercase tracking-[0.2em] mt-1">Ingénierie Réseau</p>
-                  </div>
-                  {aiMessages.length > 0 && (
-                    <button onClick={() => setAiMessages([])} className="size-10 rounded-xl bg-slate-100 text-slate-400 hover:text-red-500 hover:bg-red-50 flex items-center justify-center transition-all" title="Nouvelle conversation">
-                      <RotateCcw size={16} />
-                    </button>
-                  )}
-                </div>
-              </div>
-
-              <div className="p-10 pt-6 space-y-6">
-                {/* Chat messages */}
-                {aiMessages.length > 0 ? (
-                  <div ref={aiChatRef} className="space-y-4 max-h-[400px] overflow-y-auto pr-2 scrollbar-thin">
-                    {aiMessages.map((msg, i) => (
-                      <div key={i} className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                        {msg.role === 'ai' && (
-                          <div className="size-8 rounded-xl bg-gradient-to-br from-primary to-primary-dark text-white flex items-center justify-center shrink-0 mt-1">
-                            <Bot size={14} />
-                          </div>
-                        )}
-                        <div className={`max-w-[85%] rounded-2xl px-5 py-4 ${msg.role === 'user' ? 'bg-primary text-white rounded-br-md' : 'bg-slate-50 text-gray-800 rounded-bl-md border border-slate-100'}`}>
-                          {msg.role === 'user' ? (
-                            <p className="text-sm font-bold leading-relaxed">{msg.text}</p>
-                          ) : (
-                            <div className="text-sm font-medium leading-relaxed space-y-1.5 [&_strong]:font-extrabold [&_strong]:text-primary" dangerouslySetInnerHTML={{ __html: formatAiText(msg.text) }} />
-                          )}
-                        </div>
-                        {msg.role === 'user' && (
-                          <div className="size-8 rounded-xl bg-brand-dark text-white flex items-center justify-center shrink-0 mt-1">
-                            <User size={14} />
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                    {isAiLoading && (
-                      <div className="flex gap-3 justify-start">
-                        <div className="size-8 rounded-xl bg-gradient-to-br from-primary to-primary-dark text-white flex items-center justify-center shrink-0 mt-1">
-                          <Bot size={14} />
-                        </div>
-                        <div className="bg-slate-50 rounded-2xl rounded-bl-md px-5 py-4 border border-slate-100">
-                          <div className="flex gap-1.5 items-center h-5">
-                            <span className="size-2 rounded-full bg-primary/40 animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                            <span className="size-2 rounded-full bg-primary/40 animate-bounce" style={{ animationDelay: '150ms' }}></span>
-                            <span className="size-2 rounded-full bg-primary/40 animate-bounce" style={{ animationDelay: '300ms' }}></span>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <>
-                    <p className="text-sm font-bold text-slate-500 leading-relaxed">Décrivez votre projet terrain pour une recommandation sur-mesure.</p>
-                    <div className="flex flex-wrap gap-2">
-                      {aiSuggestions.map((s, i) => (
-                        <button key={i} onClick={() => handleAiAsk(s)} className="text-[11px] font-bold text-primary bg-primary/5 hover:bg-primary/10 border border-primary/10 px-4 py-2 rounded-xl transition-all hover:scale-[1.02] active:scale-95 text-left leading-snug">
-                          {s}
-                        </button>
-                      ))}
-                    </div>
-                  </>
-                )}
-
-                {/* Input area */}
-                <div className="relative group">
-                  <textarea
-                    value={aiInput}
-                    onChange={(e) => setAiInput(e.target.value)}
-                    onKeyDown={handleAiKeyDown}
-                    className="w-full h-28 p-5 pr-16 text-sm font-bold bg-slate-50 border-2 border-transparent rounded-2xl outline-none focus:border-primary/20 focus:bg-white transition-all resize-none"
-                    placeholder="Ex: besoin d'équiper 3 techniciens fibre..."
-                  />
-                  <button
-                    onClick={() => handleAiAsk()}
-                    disabled={isAiLoading || !aiInput.trim()}
-                    className="absolute bottom-4 right-4 size-11 bg-primary text-white rounded-xl hover:bg-primary-dark transition-all disabled:opacity-30 shadow-glow flex items-center justify-center active:scale-90"
-                  >
-                    {isAiLoading ? <div className="size-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div> : <Send size={18} />}
-                  </button>
-                </div>
-                <p className="text-[10px] font-bold text-slate-300 text-center">Entrée pour envoyer &middot; Shift+Entrée pour un saut de ligne</p>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-[56px] shadow-premium overflow-hidden sticky top-40 border border-slate-50">
-              <div className="p-12 border-b border-slate-50 bg-slate-50/50 flex items-center justify-between">
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-16 -mt-8 sm:-mt-16 lg:-mt-24 relative z-20">
+        <div className="flex flex-col-reverse lg:flex-row gap-8 sm:gap-12 lg:gap-16">
+          <aside className="w-full lg:w-[380px] shrink-0 space-y-8 lg:space-y-12">
+            <div className="bg-white rounded-[32px] sm:rounded-[44px] lg:rounded-[56px] shadow-premium overflow-hidden lg:sticky lg:top-40 border border-slate-50">
+              <div className="p-6 sm:p-8 lg:p-12 border-b border-slate-50 bg-slate-50/50 flex items-center justify-between">
                 <h3 className="font-extrabold text-xs uppercase tracking-[0.2em] text-gray-900 flex items-center gap-4">
                   <SlidersHorizontal size={20} className="text-primary" /> Filtrer
                 </h3>
               </div>
-              <div className="p-10 space-y-6">
+              <div className="p-4 sm:p-6 lg:p-10 space-y-4 sm:space-y-6">
                 {['all', ...categories.map(c => c.name)].map(cat => (
                   <label key={cat} className="flex items-center gap-6 cursor-pointer group px-4 py-2 hover:bg-slate-50 rounded-2xl transition-all">
                     <input
@@ -283,14 +315,14 @@ const Catalog: React.FC = () => {
             </div>
           </aside>
 
-          <div className="flex-1 space-y-16">
+          <div className="flex-1 space-y-12 -mt-4">
             <div className="relative group">
-              <Search size={28} className="absolute left-10 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors" />
+              <Search size={22} className="absolute left-8 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="w-full h-24 bg-white border border-slate-100 rounded-[40px] pl-24 pr-12 text-lg font-bold outline-none focus:border-primary/20 shadow-premium transition-all"
+                className="w-full h-16 bg-white border border-slate-100 rounded-[32px] pl-20 pr-10 text-base font-bold outline-none focus:border-primary/20 shadow-premium transition-all"
                 placeholder="Référence, Marque, Technologie..."
               />
             </div>
@@ -322,7 +354,7 @@ const Catalog: React.FC = () => {
                 <div className="flex items-end justify-between border-b border-slate-100 pb-10">
                   <div className="space-y-2">
                     <span className="text-[11px] font-extrabold text-primary uppercase tracking-[0.4em]">Catalogue</span>
-                    <h2 className="text-5xl font-black text-gray-900 font-display tracking-tight">Toutes les collections</h2>
+                    <h2 className="text-2xl sm:text-3xl lg:text-5xl font-black text-gray-900 font-display tracking-tight">Toutes les collections</h2>
                   </div>
                   <span className="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest">{filteredProducts.length} Références</span>
                 </div>
@@ -370,7 +402,7 @@ const Catalog: React.FC = () => {
                     <div className="flex items-end justify-between border-b border-slate-100 pb-10">
                       <div className="space-y-2">
                         <span className="text-[11px] font-extrabold text-primary uppercase tracking-[0.4em]">Collection</span>
-                        <h2 className="text-5xl font-black text-gray-900 font-display tracking-tight">{catName}</h2>
+                        <h2 className="text-2xl sm:text-3xl lg:text-5xl font-black text-gray-900 font-display tracking-tight">{catName}</h2>
                       </div>
                       <span className="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest">{prods.length} Références</span>
                     </div>
@@ -387,8 +419,8 @@ const Catalog: React.FC = () => {
             )}
 
             {filteredProducts.length === 0 && (
-              <div className="py-60 text-center bg-slate-50 rounded-[80px] border-4 border-dashed border-white">
-                 <h3 className="text-4xl font-black text-gray-900 font-display tracking-tight text-balance">Aucune référence trouvée</h3>
+              <div className="py-20 sm:py-40 lg:py-60 text-center bg-slate-50 rounded-[32px] sm:rounded-[52px] lg:rounded-[80px] border-4 border-dashed border-white">
+                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 font-display tracking-tight text-balance">Aucune référence trouvée</h3>
                  <p className="text-slate-500 text-xl font-medium mt-4">Nos stocks varient rapidement en Zone 4.</p>
               </div>
             )}

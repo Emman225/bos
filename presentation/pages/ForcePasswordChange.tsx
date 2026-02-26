@@ -39,7 +39,7 @@ const ForcePasswordChange: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex flex-col lg:flex-row">
       {/* Left panel */}
       <div className="hidden lg:flex lg:w-[55%] bg-gradient-to-br from-brand-dark via-[#0d1a0d] to-brand-dark relative overflow-hidden items-end p-16">
         <div className="absolute top-0 left-0 w-full h-full">
@@ -66,7 +66,7 @@ const ForcePasswordChange: React.FC = () => {
           </div>
 
           <div className="space-y-6">
-            <h1 className="text-6xl xl:text-7xl font-black text-white font-display tracking-tighter leading-[0.9]">
+            <h1 className="text-4xl xl:text-7xl font-black text-white font-display tracking-tighter leading-[0.9]">
               Sécurisez <br />
               <span className="text-primary italic">votre compte.</span>
             </h1>
@@ -83,7 +83,7 @@ const ForcePasswordChange: React.FC = () => {
       </div>
 
       {/* Right panel */}
-      <div className="flex-1 bg-white flex items-center justify-center p-8 lg:p-16 relative">
+      <div className="flex-1 bg-white flex items-center justify-center p-4 sm:p-8 lg:p-16 relative">
         <div className="absolute inset-0 opacity-[0.015]" style={{
           backgroundImage: 'radial-gradient(circle at 1px 1px, #2E7D32 1px, transparent 0)',
           backgroundSize: '32px 32px'
@@ -112,7 +112,7 @@ const ForcePasswordChange: React.FC = () => {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50 border border-amber-200 text-amber-600 text-[9px] font-extrabold uppercase tracking-[0.3em]">
               <KeyRound size={12} /> Changement requis
             </div>
-            <h2 className="text-4xl lg:text-5xl font-black text-gray-900 font-display tracking-tight">Nouveau mot de passe</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-black text-gray-900 font-display tracking-tight">Nouveau mot de passe</h2>
             <p className="text-slate-400 font-medium text-lg">Choisissez un mot de passe sécurisé pour continuer</p>
           </div>
 

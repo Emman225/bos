@@ -37,13 +37,13 @@ const About: React.FC = () => {
   return (
     <div className="flex flex-col bg-white">
       {/* Hero Section */}
-      <section className="pt-40 pb-32 px-6 relative overflow-hidden bg-primary-surface">
-        <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+      <section className="pt-28 sm:pt-36 lg:pt-40 pb-16 sm:pb-24 lg:pb-32 px-6 relative overflow-hidden bg-primary-surface">
+        <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-center">
           <div className="space-y-10 relative z-10">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-[10px] font-extrabold uppercase tracking-widest">
               Distributeur Telecom de Reference en Afrique de l'Ouest
             </div>
-            <h1 className="text-5xl lg:text-[90px] font-black font-display tracking-tighter leading-[0.9] text-gray-900">
+            <h1 className="text-3xl sm:text-4xl lg:text-[90px] font-black font-display tracking-tighter leading-tight lg:leading-[1.05] text-gray-900">
               Connecter l'Afrique avec une expertise <span className="text-primary italic">locale.</span>
             </h1>
             <p className="text-gray-500 text-xl lg:text-2xl leading-relaxed max-w-xl">
@@ -53,23 +53,23 @@ const About: React.FC = () => {
               Decouvrir nos solutions
             </button>
           </div>
-          <div className="relative">
-            <div className="aspect-[4/5] rounded-[60px] overflow-hidden shadow-2xl transform -rotate-2 border-8 border-white">
+          <div className="relative pb-6 sm:pb-14 lg:pb-6">
+            <div className="aspect-[4/5] rounded-[32px] sm:rounded-[44px] lg:rounded-[60px] overflow-hidden shadow-2xl transform lg:-rotate-2 border-4 sm:border-8 border-white">
                <img src="https://images.unsplash.com/photo-1653566031535-bcf33e1c2893?auto=format&fit=crop&q=80&w=1000" alt="L'equipe BOS-CI" className="w-full h-full object-cover" />
             </div>
-            <div className="absolute -bottom-10 -left-10 bg-brand-dark p-12 rounded-[40px] shadow-2xl text-white space-y-4">
-               <p className="text-5xl font-black text-primary font-display">100%</p>
-               <p className="text-xs font-extrabold uppercase tracking-widest opacity-60">Engagement Ivoirien</p>
+            <div className="hidden sm:flex absolute -bottom-4 sm:-bottom-6 left-4 sm:-left-6 lg:-bottom-10 lg:-left-10 bg-brand-dark p-6 sm:p-8 lg:p-12 rounded-[24px] sm:rounded-[32px] lg:rounded-[40px] shadow-2xl text-white flex-col space-y-3 sm:space-y-4">
+               <p className="text-3xl sm:text-4xl lg:text-5xl font-black text-primary font-display">100%</p>
+               <p className="text-[10px] sm:text-xs font-extrabold uppercase tracking-widest opacity-60">Engagement Ivoirien</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Mission / Vision / Valeurs */}
-      <section className="py-32 bg-brand-surface px-6">
+      <section className="py-16 sm:py-24 lg:py-32 bg-brand-surface px-6">
         <div className="max-w-[1440px] mx-auto space-y-20">
           <div className="text-center max-w-3xl mx-auto space-y-6">
-            <h2 className="text-4xl lg:text-7xl font-black font-display tracking-tighter text-gray-900 leading-[0.85]">
+            <h2 className="text-2xl sm:text-3xl lg:text-7xl font-black font-display tracking-tighter text-gray-900 leading-[0.85]">
               Ce qui nous <span className="text-primary italic">anime.</span>
             </h2>
           </div>
@@ -129,10 +129,10 @@ const About: React.FC = () => {
       </section>
 
       {/* Historique - Timeline */}
-      <section className="py-32 px-6 bg-white">
-        <div className="max-w-[1440px] mx-auto space-y-20">
+      <section className="py-16 sm:py-24 lg:py-32 px-6 bg-white">
+        <div className="max-w-[1440px] mx-auto space-y-12 sm:space-y-20">
           <div className="text-center max-w-3xl mx-auto space-y-6">
-            <h2 className="text-4xl lg:text-7xl font-black font-display tracking-tighter text-gray-900 leading-[0.85]">
+            <h2 className="text-2xl sm:text-3xl lg:text-7xl font-black font-display tracking-tighter text-gray-900 leading-[0.85]">
               Notre <span className="text-primary italic">parcours.</span>
             </h2>
             <p className="text-gray-500 text-xl font-medium leading-relaxed">
@@ -174,13 +174,13 @@ const About: React.FC = () => {
       </section>
 
       {/* Equipe Dirigeante */}
-      <section className="py-32 px-6 bg-[#f0f9f1]">
+      <section className="py-16 sm:py-24 lg:py-32 px-6 bg-[#f0f9f1]">
         <div className="max-w-[1440px] mx-auto space-y-20">
           <div className="text-center max-w-3xl mx-auto space-y-6">
             <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-extrabold uppercase tracking-[0.3em] mx-auto">
               <Users size={14} /> Leadership
             </div>
-            <h2 className="text-4xl lg:text-7xl font-black font-display tracking-tighter text-gray-900 leading-[0.85]">
+            <h2 className="text-2xl sm:text-3xl lg:text-7xl font-black font-display tracking-tighter text-gray-900 leading-[0.85]">
               L'equipe <span className="text-primary italic">dirigeante.</span>
             </h2>
             <p className="text-gray-500 text-xl font-medium leading-relaxed">
@@ -224,7 +224,7 @@ const About: React.FC = () => {
             </div>
 
             {/* Other Team Members */}
-            <div className="lg:col-span-7 grid grid-cols-2 gap-6">
+            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
               {TEAM.slice(1).map((member, i) => (
                 <div
                   key={i}
@@ -246,10 +246,10 @@ const About: React.FC = () => {
       </section>
 
       {/* Zones de Couverture */}
-      <section className="py-32 px-6 bg-white">
-        <div className="max-w-[1440px] mx-auto space-y-20">
+      <section className="py-16 sm:py-24 lg:py-32 px-6 bg-white">
+        <div className="max-w-[1440px] mx-auto space-y-12 sm:space-y-20">
           <div className="text-center max-w-3xl mx-auto space-y-6">
-            <h2 className="text-4xl lg:text-7xl font-black font-display tracking-tighter text-gray-900 leading-[0.85]">
+            <h2 className="text-2xl sm:text-3xl lg:text-7xl font-black font-display tracking-tighter text-gray-900 leading-[0.85]">
               Zones de <span className="text-primary italic">couverture.</span>
             </h2>
             <p className="text-gray-500 text-xl font-medium leading-relaxed">
@@ -281,10 +281,10 @@ const About: React.FC = () => {
       </section>
 
       {/* Certifications & Partenariats */}
-      <section className="py-32 px-6 bg-brand-dark">
+      <section className="py-16 sm:py-24 lg:py-32 px-6 bg-brand-dark">
         <div className="max-w-[1440px] mx-auto space-y-20">
           <div className="text-center max-w-3xl mx-auto space-y-6">
-            <h2 className="text-4xl lg:text-7xl font-black font-display tracking-tighter text-white leading-[0.85]">
+            <h2 className="text-2xl sm:text-3xl lg:text-7xl font-black font-display tracking-tighter text-white leading-[0.85]">
               Certifications & <span className="text-primary italic">Partenaires.</span>
             </h2>
             <p className="text-slate-400 text-xl font-medium leading-relaxed">
@@ -323,13 +323,13 @@ const About: React.FC = () => {
       </section>
 
       {/* Quote Section - Amina Cisse */}
-      <section className="py-32 px-6 bg-white">
-        <div className="max-w-[1200px] mx-auto bg-primary rounded-[60px] p-16 lg:p-24 text-white relative overflow-hidden shadow-2xl shadow-primary/30">
+      <section className="py-16 sm:py-24 lg:py-32 px-6 bg-white">
+        <div className="max-w-[1200px] mx-auto bg-primary rounded-[32px] sm:rounded-[44px] lg:rounded-[60px] p-8 sm:p-12 lg:p-24 text-white relative overflow-hidden shadow-2xl shadow-primary/30">
            <div className="absolute top-0 right-0 p-20 opacity-10">
               <Globe size={300} className="animate-spin-slow" />
            </div>
            <div className="relative z-10 max-w-3xl space-y-12">
-              <p className="text-3xl lg:text-5xl font-black font-display leading-tight italic">
+              <p className="text-xl sm:text-2xl lg:text-5xl font-black font-display leading-tight italic">
                 "Notre mission est d'equiper chaque professionnel ouest-africain avec le meilleur de la technologie mondiale, pour batir des reseaux fiables et perennes."
               </p>
               <div className="flex items-center gap-6">
@@ -346,13 +346,13 @@ const About: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 px-6">
-        <div className="max-w-[1440px] mx-auto bg-brand-dark rounded-[80px] p-16 lg:p-32 text-center relative overflow-hidden shadow-premium-hover">
+      <section className="py-16 sm:py-24 lg:py-32 px-6">
+        <div className="max-w-[1440px] mx-auto bg-brand-dark rounded-[32px] sm:rounded-[52px] lg:rounded-[80px] p-8 sm:p-14 lg:p-32 text-center relative overflow-hidden shadow-premium-hover">
           <div className="absolute top-0 right-0 p-32 opacity-10 pointer-events-none">
             <Globe size={400} className="text-white animate-spin-slow" />
           </div>
           <div className="relative z-10 space-y-12 max-w-4xl mx-auto">
-            <h2 className="text-5xl lg:text-[100px] font-black text-white font-display tracking-tighter leading-[0.85] text-balance">
+            <h2 className="text-2xl sm:text-4xl lg:text-[100px] font-black text-white font-display tracking-tighter leading-tight lg:leading-[1.05] text-balance">
               Pret a <span className="text-primary italic">collaborer ?</span>
             </h2>
             <p className="text-slate-400 text-xl lg:text-2xl font-medium leading-relaxed max-w-2xl mx-auto text-balance">

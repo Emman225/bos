@@ -71,27 +71,27 @@ const ProductDetail: React.FC = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Dark hero band */}
-      <div className="bg-brand-dark h-[420px] relative">
+      <div className="bg-brand-dark h-[280px] sm:h-[350px] lg:h-[420px] relative">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-brand-dark/50"></div>
       </div>
 
       {/* Main content overlapping hero */}
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-16 -mt-[320px] relative z-10 pb-32">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-16 -mt-[200px] sm:-mt-[260px] lg:-mt-[320px] relative z-10 pb-16 sm:pb-24 lg:pb-32">
         {/* Back button */}
         <button onClick={() => navigate('catalog')} className="flex items-center gap-2 text-white/60 hover:text-white font-bold text-sm mb-10 transition-colors">
           <ChevronLeft size={20} /> Retour au catalogue
         </button>
 
         {/* Main product card */}
-        <div className="bg-white rounded-[48px] shadow-2xl border border-slate-100 overflow-hidden">
+        <div className="bg-white rounded-[24px] sm:rounded-[36px] lg:rounded-[48px] shadow-2xl border border-slate-100 overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-2">
             {/* Image gallery column */}
-            <div className="p-10 lg:p-14 space-y-6">
+            <div className="p-4 sm:p-8 lg:p-14 space-y-4 sm:space-y-6">
               {/* Main image */}
-              <div className="relative aspect-square rounded-[40px] bg-slate-50 border border-slate-100 overflow-hidden group cursor-pointer" onClick={() => setLightboxOpen(true)}>
+              <div className="relative aspect-square rounded-[24px] sm:rounded-[32px] lg:rounded-[40px] bg-slate-50 border border-slate-100 overflow-hidden group cursor-pointer" onClick={() => setLightboxOpen(true)}>
                 <img
                   src={currentImage}
-                  className="w-full h-full object-contain mix-blend-multiply p-12 transition-all duration-500"
+                  className="w-full h-full object-contain mix-blend-multiply p-6 sm:p-10 lg:p-12 transition-all duration-500"
                   alt={product.name}
                 />
 
@@ -143,7 +143,7 @@ const ProductDetail: React.FC = () => {
                     <button
                       key={idx}
                       onClick={() => setSelectedImageIndex(idx)}
-                      className={`shrink-0 size-20 rounded-2xl bg-slate-50 border-2 overflow-hidden transition-all ${
+                      className={`shrink-0 size-14 sm:size-16 lg:size-20 rounded-2xl bg-slate-50 border-2 overflow-hidden transition-all ${
                         idx === selectedImageIndex
                           ? 'border-primary shadow-glow'
                           : 'border-slate-100 hover:border-slate-300'
@@ -157,14 +157,14 @@ const ProductDetail: React.FC = () => {
             </div>
 
             {/* Product info column */}
-            <div className="p-10 lg:p-14 flex flex-col gap-10 lg:border-l border-slate-50">
+            <div className="p-4 sm:p-8 lg:p-14 flex flex-col gap-6 sm:gap-8 lg:gap-10 lg:border-l border-slate-50">
               {/* Brand pill + name */}
               <div className="space-y-5">
                 <span className="inline-flex items-center gap-2 text-[10px] font-extrabold uppercase tracking-widest text-primary bg-primary/5 px-4 py-2 rounded-full">
                   <span className="size-1.5 rounded-full bg-primary"></span>
                   {product.brand}
                 </span>
-                <h1 className="text-4xl lg:text-5xl font-black font-display tracking-tight text-gray-900 leading-[0.95]">{product.name}</h1>
+                <h1 className="text-2xl sm:text-3xl lg:text-5xl font-black font-display tracking-tight text-gray-900 leading-[0.95]">{product.name}</h1>
                 <p className="text-slate-400 font-bold uppercase tracking-widest text-xs">Ref: {product.ref}</p>
                 {settings.show_product_prices && product.price != null && (
                   <div className="pt-2">
@@ -178,9 +178,9 @@ const ProductDetail: React.FC = () => {
               <p className="text-slate-500 text-lg leading-relaxed font-medium">{product.description}</p>
 
               {/* Trust badges row */}
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 {trustBadges.map((badge, i) => (
-                  <div key={i} className="flex-1 flex items-center gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                  <div key={i} className="flex-1 flex items-center gap-3 p-3 sm:p-4 rounded-2xl bg-slate-50 border border-slate-100">
                     <div className="text-primary">{badge.icon}</div>
                     <div>
                       <p className="text-[10px] font-extrabold text-gray-900 uppercase tracking-widest">{badge.label}</p>
@@ -200,7 +200,7 @@ const ProductDetail: React.FC = () => {
               </ul>
 
               {/* CTA + Stock */}
-              <div className="pt-8 border-t border-slate-100 flex items-center gap-6 mt-auto">
+              <div className="pt-6 sm:pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6 mt-auto">
                 <button
                   onClick={() => addToQuote(product)}
                   className="flex-1 h-14 bg-primary text-white rounded-2xl font-extrabold uppercase tracking-widest text-xs shadow-2xl shadow-primary/30 hover:bg-primary-dark transition-all flex items-center justify-center gap-4 active:scale-[0.97]"
@@ -222,7 +222,7 @@ const ProductDetail: React.FC = () => {
         </div>
 
         {/* Tabs section */}
-        <div className="mt-12 bg-white rounded-[48px] shadow-premium border border-slate-100 p-10 lg:p-14">
+        <div className="mt-8 sm:mt-12 bg-white rounded-[24px] sm:rounded-[36px] lg:rounded-[48px] shadow-premium border border-slate-100 p-4 sm:p-8 lg:p-14">
           <div className="flex gap-12 border-b border-slate-100 mb-12 overflow-x-auto no-scrollbar">
             {['specs', 'accessoires', 'docs'].map(tab => (
               <button
@@ -275,7 +275,7 @@ const ProductDetail: React.FC = () => {
           </div>
 
           {/* Main image */}
-          <div className="flex-1 flex items-center justify-center w-full px-24 py-20" onClick={(e) => e.stopPropagation()}>
+          <div className="flex-1 flex items-center justify-center w-full px-4 sm:px-12 lg:px-24 py-8 sm:py-14 lg:py-20" onClick={(e) => e.stopPropagation()}>
             <img
               src={currentImage}
               className="max-w-full max-h-full object-contain rounded-3xl shadow-2xl"

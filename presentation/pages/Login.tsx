@@ -102,7 +102,7 @@ const Login: React.FC = () => {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50 border border-amber-200 text-amber-600 text-[9px] font-extrabold uppercase tracking-[0.3em]">
               <KeyRound size={12} /> Récupération
             </div>
-            <h2 className="text-4xl lg:text-5xl font-black text-gray-900 font-display tracking-tight">Mot de passe oublié</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-black text-gray-900 font-display tracking-tight">Mot de passe oublié</h2>
             <p className="text-slate-400 font-medium text-lg">Entrez votre email pour recevoir un code de réinitialisation</p>
           </div>
           <form onSubmit={handleForgotEmail} className="space-y-6">
@@ -135,7 +135,7 @@ const Login: React.FC = () => {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-surface border border-primary/10 text-primary text-[9px] font-extrabold uppercase tracking-[0.3em]">
               <Hash size={12} /> Vérification
             </div>
-            <h2 className="text-4xl lg:text-5xl font-black text-gray-900 font-display tracking-tight">Réinitialisation</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-black text-gray-900 font-display tracking-tight">Réinitialisation</h2>
             <p className="text-slate-400 font-medium text-lg">Entrez le code reçu par email et votre nouveau mot de passe</p>
           </div>
           <form onSubmit={handleResetPassword} className="space-y-6">
@@ -188,7 +188,7 @@ const Login: React.FC = () => {
           </div>
         </div>
         <div className="space-y-3 mb-10">
-          <h2 className="text-4xl lg:text-5xl font-black text-gray-900 font-display tracking-tight">Connexion</h2>
+          <h2 className="text-2xl sm:text-3xl lg:text-5xl font-black text-gray-900 font-display tracking-tight">Connexion</h2>
           <p className="text-slate-400 font-medium text-lg">Accédez à votre tableau de bord</p>
         </div>
         <form onSubmit={handleLogin} className="space-y-6">
@@ -230,7 +230,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="h-screen overflow-hidden flex">
+    <div className="min-h-screen lg:h-screen lg:overflow-hidden flex">
       {/* Left panel - Visual brand side */}
       <div className="hidden lg:flex lg:w-[55%] bg-gradient-to-br from-brand-dark via-[#0d1a0d] to-brand-dark relative overflow-hidden items-end p-16">
         <div className="absolute top-0 left-0 w-full h-full">
@@ -255,7 +255,7 @@ const Login: React.FC = () => {
             </div>
           </div>
           <div className="space-y-6">
-            <h1 className="text-6xl xl:text-7xl font-black text-white font-display tracking-tighter leading-[0.9]">
+            <h1 className="text-4xl xl:text-7xl font-black text-white font-display tracking-tighter leading-[0.9]">
               Console <br />
               <span className="text-primary italic">Admin.</span>
             </h1>
@@ -281,7 +281,7 @@ const Login: React.FC = () => {
       </div>
 
       {/* Right panel - Form side */}
-      <div className="flex-1 bg-gray-100 flex items-center justify-center p-8 lg:p-16 relative">
+      <div className="flex-1 bg-gray-100 flex items-center justify-center p-4 sm:p-8 lg:p-16 relative">
         <div className="absolute inset-0 opacity-[0.015]" style={{
           backgroundImage: 'radial-gradient(circle at 1px 1px, #2E7D32 1px, transparent 0)',
           backgroundSize: '32px 32px'
@@ -290,7 +290,7 @@ const Login: React.FC = () => {
           <button onClick={() => navigate('home')} className="flex items-center gap-2 text-slate-400 hover:text-primary font-bold text-xs transition-colors group">
             <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Retour au site
           </button>
-        <div className="bg-white rounded-3xl p-10 shadow-sm border border-gray-200">
+        <div className="bg-white rounded-3xl p-6 sm:p-8 lg:p-10 shadow-sm border border-gray-200">
           {renderRightPanel()}
         </div>
           <p className="text-center mt-4 text-[10px] font-bold text-slate-300 uppercase tracking-widest">
